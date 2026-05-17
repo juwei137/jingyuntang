@@ -1,0 +1,705 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>京剧记忆卡牌 - 京韵堂</title>
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+.game-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  min-height: calc(100vh - 250px);
+}
+.game-mode-box {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.game-level-box, .game-type-box {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.game-mode-item, .game-type-item, .game-level-item {
+  background: #fff;
+  border: 2px solid #C41E3A;
+  padding: 35px 30px;
+  border-radius: 16px;
+  min-width: 180px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.game-mode-item:hover, .game-type-item:hover, .game-level-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.game-mode-item h2, .game-type-item h2, .game-level-item h2 {
+  color: #C41E3A;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.game-mode-item p, .game-type-item p, .game-level-item p {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+.game-btn {
+  background: #C41E3A;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.game-btn:hover {
+  background: #a01830;
+  transform: scale(1.02);
+}
+.game-back-btn {
+  background: #8B4513;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.game-back-btn:hover {
+  background: #6b3410;
+}
+.game-page {
+  display: none;
+}
+.game-info {
+  font-size: 18px;
+  color: #C41E3A;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  background: #fff;
+  padding: 15px 30px;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.game-board {
+  display: grid;
+  gap: 12px;
+  justify-content: center;
+  margin: 30px auto;
+}
+.poker {
+  width: 80px;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.4s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.poker.flipped {
+  transform: rotateY(180deg);
+}
+.poker-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  border: 2px solid #C41E3A;
+  overflow: hidden;
+}
+.poker-back {
+  background-image: url("../images/back.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #8B0000;
+}
+.poker-front {
+  transform: rotateY(180deg);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.poker-front img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.poker.matched {
+  opacity: 0;
+  pointer-events: none;
+}
+.game-win {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.game-win-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  border: 3px solid #C41E3A;
+  text-align: center;
+}
+.game-win h2 {
+  color: #C41E3A;
+  margin-bottom: 20px;
+}
+.game-win button {
+  background: #C41E3A;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.stats-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid #DBC078;
+}
+.stats-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.stats-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #DBC078;
+  background: #fff;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #8B4513;
+  min-width: 200px;
+}
+.stats-toggle-btn:hover {
+  background: #DBC078;
+  color: #333;
+  transform: scale(1.02);
+}
+.stats-content {
+  display: none;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #DBC078;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+.stats-content.show {
+  display: block;
+}
+.column-box {
+  width: 100%;
+}
+.box-title {
+  font-size: 18px;
+  color: #8B4513;
+  margin-bottom: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #DBC078;
+  padding-bottom: 8px;
+}
+.filter-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.filter-label {
+  font-size: 12px;
+  color: #999;
+  margin-right: 5px;
+  line-height: 28px;
+}
+.filter-btn {
+  padding: 4px 14px;
+  border: 1px solid #DBC078;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 12px;
+}
+.filter-btn.active {
+  background: #8B4513;
+  color: #fff;
+  border-color: #8B4513;
+}
+.filter-btn:hover {
+  background: #DBC078;
+}
+.record-item, .rank-item {
+  padding: 10px;
+  border-bottom: 1px dashed #DBC078;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.record-item:last-child, .rank-item:last-child {
+  border-bottom: none;
+}
+.record-mode {
+  font-weight: bold;
+  color: #C41E3A;
+  font-size: 13px;
+}
+.record-detail {
+  font-size: 11px;
+  color: #666;
+  margin-top: 3px;
+}
+.record-result {
+  float: right;
+  color: #8B4513;
+  font-weight: bold;
+}
+.empty-tip {
+  color: #999;
+  text-align: center;
+  padding: 30px 15px;
+}
+.clear-btn {
+  background: #f08585;
+  color: #fff;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11px;
+}
+.clear-btn:hover {
+  background: #e06767;
+}
+.login-tip {
+  text-align: center;
+  padding: 15px;
+  background: #fff8e1;
+  border-radius: 8px;
+  margin: 15px 0;
+  color: #8B4513;
+  border: 1px solid #DBC078;
+}
+.login-tip button {
+  background: #8B4513;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.current-filter-info {
+  font-size: 11px;
+  color: #C41E3A;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+.scroll-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+@media (max-width: 768px) {
+  .poker { width: 55px; height: 75px; }
+  .game-info { gap: 15px; font-size: 12px; padding: 10px 15px; }
+  .game-mode-item, .game-type-item, .game-level-item { padding: 25px 20px; min-width: 140px; }
+  .game-mode-item h2 { font-size: 18px; }
+  .stats-toggle-btn { padding: 10px 20px; font-size: 14px; min-width: 160px; }
+  .stats-buttons { gap: 15px; }
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+    <div class="nav-container">
+        <img src="../images/logo.png" alt="LOGO" class="site-logo">
+        <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+        <ul class="nav-list">
+          <li><a href="../index.html">首页</a></li>
+          <li><a href="文化展示.html">文化展示</a></li>
+          <li><a href="资源中心.html">资源中心</a></li>
+          <li><a href="趣味学堂.html" class="active">趣味学堂</a></li>
+          <li><a href="社区交流.html">社区交流</a></li>
+        </ul>
+    </div>
+    <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em>
+    </button>
+    <div class="search-wrapper">
+        <input type="text" class="search-input" placeholder="搜索全站内容...">
+        <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <a href="趣味学堂.html">趣味学堂</a> > <strong>京剧记忆卡牌游戏</strong></p>
+
+<section class="content-section">
+        <h2 class="content-title">京剧记忆卡牌游戏</h2>
+        <p style="color:#666; line-height:1.3; margin-bottom:13px;">翻转卡牌记忆国粹细节，在趣味游戏中认识京剧角色、脸谱与道具，轻松掌握京剧文化知识，感受传统艺术的独特魅力。</p>	
+<div class="game-wrapper">
+    <div id="loginTip" class="login-tip" style="display:none;">
+        <i class="fas fa-info-circle"></i> 登录后可查看排行榜和历史记录
+        <button onclick="showLoginModal()"><i class="fas fa-sign-in-alt"></i> 立即登录</button>
+    </div>
+
+    <div id="modePage">
+        <div class="game-mode-box">
+            <div class="game-mode-item">
+                <h2><i class="fas fa-layer-group"></i> 混合模式</h2>
+                <p>脸谱 + 戏帽 + 角色</p>
+                <button class="game-btn" onclick="goMode('all')">进入</button>
+            </div>
+            <div class="game-mode-item">
+                <h2><i class="fas fa-filter"></i> 单一模式</h2>
+                <p>只选择一种类型</p>
+                <button class="game-btn" onclick="goMode('single')">进入</button>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-buttons">
+                <button class="stats-toggle-btn collapsed" id="rankToggleBtn" onclick="toggleRankPanel()">
+                    <i class="fas fa-trophy"></i> 游戏排行榜
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <button class="stats-toggle-btn collapsed" id="recordToggleBtn" onclick="toggleRecordPanel()">
+                    <i class="fas fa-history"></i> 我的历史记录
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div id="rankPanel" class="stats-content">
+                <div class="column-box">
+                    <div class="box-title">
+                        <span><i class="fas fa-trophy"></i> 🏆 全服排行榜</span>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">模式：</span>
+                        <button class="filter-btn active" data-rank-mode="all">全部</button>
+                        <button class="filter-btn" data-rank-mode="mix">混合模式</button>
+                        <button class="filter-btn" data-rank-mode="face">脸谱模式</button>
+                        <button class="filter-btn" data-rank-mode="cap">戏帽模式</button>
+                        <button class="filter-btn" data-rank-mode="role">角色模式</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">难度：</span>
+                        <button class="filter-btn active" data-rank-difficulty="all">全部</button>
+                        <button class="filter-btn" data-rank-difficulty="简单">简单</button>
+                        <button class="filter-btn" data-rank-difficulty="中等">中等</button>
+                        <button class="filter-btn" data-rank-difficulty="困难">困难</button>
+                    </div>
+                    <div id="rankList" class="scroll-list"></div>
+                    <div class="current-filter-info" id="rankFilterInfo"></div>
+                </div>
+            </div>
+            
+            <div id="recordPanel" class="stats-content">
+                <div class="column-box">
+                    <div class="box-title">
+                        <span><i class="fas fa-history"></i> 📜 我的游戏记录</span>
+                        <button class="clear-btn" onclick="clearGameRecord()">清空记录</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">筛选：</span>
+                        <button class="filter-btn active" data-record-filter="all">全部</button>
+                        <button class="filter-btn" data-record-filter="mix">混合模式</button>
+                        <button class="filter-btn" data-record-filter="face">脸谱模式</button>
+                        <button class="filter-btn" data-record-filter="cap">戏帽模式</button>
+                        <button class="filter-btn" data-record-filter="role">角色模式</button>
+                    </div>
+                    <div id="recordList" class="scroll-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="typePage" style="display:none">
+        <div class="game-type-box">
+            <div class="game-type-item"><h2><i class="fas fa-mask"></i> 脸谱</h2><p>京剧脸谱大全</p><button class="game-btn" onclick="selectType('face')">选择</button></div>
+            <div class="game-type-item"><h2><i class="fas fa-crown"></i> 戏帽</h2><p>京剧头饰戏帽</p><button class="game-btn" onclick="selectType('cap')">选择</button></div>
+            <div class="game-type-item"><h2><i class="fas fa-user"></i> 角色</h2><p>京剧角色形象</p><button class="game-btn" onclick="selectType('role')">选择</button></div>
+        </div>
+        <button class="game-back-btn" onclick="backToMode()"><i class="fas fa-arrow-left"></i> 返回</button>
+    </div>
+
+    <div id="levelPage" style="display:none">
+        <div class="game-level-box">
+            <div class="game-level-item"><h2><i class="fas fa-seedling"></i> 简单</h2><p>6×6 卡牌 | 18对</p><button class="game-btn" onclick="startGame(6)">开始</button></div>
+            <div class="game-level-item"><h2><i class="fas fa-chart-line"></i> 中等</h2><p>8×8 卡牌 | 32对</p><button class="game-btn" onclick="startGame(8)">开始</button></div>
+            <div class="game-level-item"><h2><i class="fas fa-fire"></i> 困难</h2><p>10×10 卡牌 | 50对</p><button class="game-btn" onclick="startGame(10)">开始</button></div>
+        </div>
+        <button class="game-back-btn" onclick="backToMode()"><i class="fas fa-arrow-left"></i> 返回</button>
+    </div>
+
+    <div class="game-page" id="gamePage">
+        <button class="game-back-btn" onclick="backToMode()"><i class="fas fa-home"></i> 返回主页面</button>
+        <div class="game-info">
+            <div>🎴 配对：<span id="now">0</span>/<span id="total">0</span></div>
+            <div>👣 步数：<span id="step">0</span></div>
+            <div>⏱️ 时间：<span id="time">0</span>秒</div>
+        </div>
+        <div id="board" class="game-board"></div>
+    </div>
+
+    <div class="game-win" id="winBox">
+        <div class="game-win-box">
+            <h2>🎉 恭喜通关！</h2>
+            <p>总步数：<span id="s">0</span></p>
+            <p>用时：<span id="t">0</span> 秒</p>
+            <button onclick="location.reload()">再来一局</button>
+        </div>
+    </div>
+</div>
+</section>
+<footer>
+    <p>&copy; 2026 京韵堂 版权所有</p>
+</footer>
+
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/js.js"></script>
+<script>
+let currentRankMode = 'all';
+let currentRankDifficulty = 'all';
+let currentRecordFilter = 'all';
+let isRankOpen = false;
+let isRecordOpen = false;
+
+function toggleRankPanel() {
+    const panel = document.getElementById('rankPanel');
+    const btn = document.getElementById('rankToggleBtn');
+    if (isRankOpen) {
+        panel.classList.remove('show');
+        btn.classList.add('collapsed');
+        btn.innerHTML = '<i class="fas fa-trophy"></i> 游戏排行榜 <i class="fas fa-chevron-down"></i>';
+        isRankOpen = false;
+    } else {
+        panel.classList.add('show');
+        btn.classList.remove('collapsed');
+        btn.innerHTML = '<i class="fas fa-trophy"></i> 收起排行榜 <i class="fas fa-chevron-up"></i>';
+        isRankOpen = true;
+        renderGameRank();
+    }
+}
+
+function toggleRecordPanel() {
+    const panel = document.getElementById('recordPanel');
+    const btn = document.getElementById('recordToggleBtn');
+    if (isRecordOpen) {
+        panel.classList.remove('show');
+        btn.classList.add('collapsed');
+        btn.innerHTML = '<i class="fas fa-history"></i> 我的历史记录 <i class="fas fa-chevron-down"></i>';
+        isRecordOpen = false;
+    } else {
+        panel.classList.add('show');
+        btn.classList.remove('collapsed');
+        btn.innerHTML = '<i class="fas fa-history"></i> 收起历史记录 <i class="fas fa-chevron-up"></i>';
+        isRecordOpen = true;
+        renderGameRecord();
+    }
+}
+
+document.querySelector('.search-btn').addEventListener('click', function() {
+    const searchText = document.querySelector('.search-input').value.trim();
+    if (!searchText) { alert('请输入搜索内容'); return; }
+    alert(`正在搜索：${searchText}，找到相关结果`);
+});
+document.querySelector('.search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') document.querySelector('.search-btn').click();
+});
+
+function isGameLoggedIn() {
+    return localStorage.getItem("jyLogin") === "true" || localStorage.getItem("currentUser") !== null || localStorage.getItem("username") !== null;
+}
+function getGameUser() {
+    return localStorage.getItem("currentUser") || localStorage.getItem("username");
+}
+function showLoginModal() {
+    if (typeof window !== 'undefined' && window.showLoginModal) {
+        window.showLoginModal(function(success) { if (success) location.reload(); }, "查看排行榜和历史记录需要登录");
+    } else {
+        alert("请前往个人中心登录");
+        window.location.href = '个人中心.html';
+    }
+}
+function updateLoginTip() {
+    const loginTip = document.getElementById('loginTip');
+    if (!isGameLoggedIn()) loginTip.style.display = 'block';
+    else loginTip.style.display = 'none';
+}
+
+function renderGameRecord() {
+    const user = getGameUser();
+    const list = document.getElementById("recordList");
+    if (!user) { list.innerHTML = `<div class="empty-tip"><i class="fas fa-lock"></i> 请先登录查看历史记录</div>`; return; }
+    let records = JSON.parse(localStorage.getItem(`game_record_${user}`) || '[]');
+    if (currentRecordFilter !== 'all') {
+        let filterMode = '';
+        if (currentRecordFilter === 'mix') filterMode = '混合模式';
+        else if (currentRecordFilter === 'face') filterMode = '脸谱模式';
+        else if (currentRecordFilter === 'cap') filterMode = '戏帽模式';
+        else if (currentRecordFilter === 'role') filterMode = '角色模式';
+        records = records.filter(r => r.mode === filterMode);
+    }
+    if (records.length === 0) {
+        list.innerHTML = `<div class="empty-tip">暂无游戏记录</div>`;
+        return;
+    }
+    let html = "";
+    records.slice(0, 30).forEach((item) => {
+        let modeIcon = item.mode === '混合模式' ? '🎭' : (item.mode === '脸谱模式' ? '🎭' : (item.mode === '戏帽模式' ? '👑' : '👤'));
+        html += `<div class="record-item">
+            <div class="record-mode">${modeIcon} ${item.mode}</div>
+            <div class="record-detail">难度：${item.level} | 步数：${item.steps}步 | 用时：${item.time}秒</div>
+            <div class="record-detail" style="color:#999;">${item.date}</div>
+            <div class="record-result">🎯 配对：${item.pairs}对</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+}
+
+function clearGameRecord() {
+    const user = getGameUser();
+    if (!user) { alert("请先登录"); showLoginModal(); return; }
+    if (!confirm("确定清空所有游戏历史记录吗？")) return;
+    localStorage.removeItem(`game_record_${user}`);
+    renderGameRecord();
+    alert("历史记录已清空");
+}
+
+function isRecordMatch(record, rankMode, rankDifficulty) {
+    if (rankMode !== 'all') {
+        if (rankMode === 'mix' && record.mode !== '混合模式') return false;
+        if (rankMode === 'face' && record.mode !== '脸谱模式') return false;
+        if (rankMode === 'cap' && record.mode !== '戏帽模式') return false;
+        if (rankMode === 'role' && record.mode !== '角色模式') return false;
+    }
+    if (rankDifficulty !== 'all' && record.level !== rankDifficulty) return false;
+    return true;
+}
+
+function renderGameRank() {
+    const list = document.getElementById("rankList");
+    const filterInfo = document.getElementById("rankFilterInfo");
+    if (!isGameLoggedIn()) { list.innerHTML = `<div class="empty-tip">请先登录查看排行榜</div>`; return; }
+    const allScores = [];
+    for(let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if(key && key.startsWith('game_record_')) {
+            const user = key.replace('game_record_', '');
+            const records = JSON.parse(localStorage.getItem(key) || '[]');
+            records.forEach(record => {
+                if (record && record.steps && record.time && isRecordMatch(record, currentRankMode, currentRankDifficulty)) {
+                    allScores.push({ user: user, steps: record.steps, time: record.time, date: record.date, level: record.level, mode: record.mode });
+                }
+            });
+        }
+    }
+    allScores.sort((a, b) => { if (a.time !== b.time) return a.time - b.time; return a.steps - b.steps; });
+    let modeText = currentRankMode === 'all' ? '全部模式' : (currentRankMode === 'mix' ? '混合模式' : (currentRankMode === 'face' ? '脸谱模式' : (currentRankMode === 'cap' ? '戏帽模式' : '角色模式')));
+    let difficultyText = currentRankDifficulty === 'all' ? '全部难度' : currentRankDifficulty + '难度';
+    filterInfo.innerHTML = `🏆 当前排行：${modeText} · ${difficultyText} (用时最少优先)`;
+    if (allScores.length === 0) { list.innerHTML = `<div class="empty-tip">暂无排行数据</div>`; return; }
+    let html = "";
+    allScores.slice(0, 20).forEach((item, i) => {
+        const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}.`;
+        html += `<div class="rank-item">
+            <div><strong>${medal}</strong> <strong style="color:#C41E3A;">${escapeHtml(item.user)}</strong>${i === 0 ? ' 👑' : ''}</div>
+            <div style="font-size:12px; color:#666;">${item.mode} · ${item.level}</div>
+            <div>⏱️ ${item.time}秒 | 🚶 ${item.steps}步</div>
+            <div style="font-size:10px; color:#999;">${item.date || ''}</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+}
+
+function bindFilterEvents() {
+    document.querySelectorAll('[data-rank-mode]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-rank-mode]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRankMode = this.dataset.rankMode;
+            renderGameRank();
+        });
+    });
+    document.querySelectorAll('[data-rank-difficulty]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-rank-difficulty]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRankDifficulty = this.dataset.rankDifficulty;
+            renderGameRank();
+        });
+    });
+    document.querySelectorAll('[data-record-filter]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-record-filter]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRecordFilter = this.dataset.recordFilter;
+            renderGameRecord();
+        });
+    });
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+window.onload = function() {
+    updateLoginTip();
+    bindFilterEvents();
+    document.getElementById('rankPanel').classList.remove('show');
+    document.getElementById('recordPanel').classList.remove('show');
+    isRankOpen = false;
+    isRecordOpen = false;
+    renderGameRank();
+    renderGameRecord();
+};
+</script>
+</body>
+</html> 

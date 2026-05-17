@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>京剧起源与发展</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #fdf6e3;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 28px;
+            color: #9b0000;
+            margin-bottom: 37px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 31px;
+            margin-bottom: 13px;
+            padding: 13px;
+            border: 3px solid #e6c2a8;
+            border-radius: 12px;
+            background-color: #F1F3E;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .item.reverse {
+            flex-direction: row-reverse;
+        }
+        .item img {
+            width: 31%;
+			height: 273px;
+            border-radius:13px;
+            object-fit: cover;
+        }
+        .text {
+            width: 53%;
+        }
+        .text h3 {
+            font-size: 20px;
+            color: #9b0000;
+            margin-bottom: 12px;
+        }
+        .text p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+        }
+        @media (max-width:768px) {
+            .item, .item.reverse {
+                flex-direction: column;
+            }
+            .item img, .text {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav-container">
+			<img src="../images/logo.png" alt="LOGO" class="site-logo">
+            <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="../index.html">首页</a></li>
+              <li><a href="文化展示.html" class="active">文化展示</a></li>
+              <li><a href="资源中心.html">资源中心</a></li>
+              <li><a href="趣味学堂.html">趣味学堂</a></li>
+			  <li><a href="社区交流.html">社区交流</a></li>
+          </ul>
+  </div>
+		<button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em></button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+	
+	<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <a href="文化展示.html">文化展示</a> > <strong>京剧起源与发展</strong></p>
+	
+	<section class="content-section">
+        <h2 class="content-title">京剧的起源与发展</h2>
+        <p style="color:#666; line-height:1.3; margin-bottom:13px;">
+            京剧形成于清代乾隆至道光年间，是中国影响最大的戏曲剧种，有“国剧”“国粹”之称。
+
+清代乾隆末期，四大徽班（三庆、四喜、春台、和春）先后进入北京演出。徽班以唱二黄调为主，兼唱昆曲、梆子等腔调，表演生动、贴近民间，迅速在北京走红。
+
+随后，来自湖北的汉调艺人进京，与徽班同台演出，带来了西皮调。徽调与汉调相互融合，又吸收了昆曲、秦腔、京腔等戏曲的表演程式、音乐与剧目，最终形成了京剧。
+        </p>
+      <div class="item">
+        <img src="../images/徽班进京.png" alt="" class="item img">
+        <div class="text">
+          <h3>1. 徽班进京（1790年）</h3>
+            <p>为庆祝乾隆皇帝八十大寿，以三庆班为首的徽班率先从南方进入北京演出。徽班唱腔丰富、表演生动，深受宫廷与百姓喜爱，随后四喜、春台、和春等三大徽班相继进京，史称“四大徽班”。他们在北京站稳脚跟，吸收当地戏曲精华，为京剧的诞生奠定了最重要的基础。</p>
+        </div>
+    </div>
+		
+    <div class="item reverse">
+        <img src="../images/徽汉合流.png" alt="" class="item img">
+        <div class="text">
+          <h3>2. 徽汉合流（1830年后）</h3>
+            <p>湖北的汉调艺人进京后，与徽班同台演出、互相融合，形成了“徽汉合流”的局面。徽班的二黄唱腔与汉调的西皮唱腔完美结合，形成了京剧最核心的皮黄声腔体系。这一融合让音乐更丰富、表演更成熟，诞生了“皮黄戏”，成为京剧的真正雏形。</p>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="../images/京剧正式形成.png" alt="" class="item img">
+        <div class="text">
+          <h3>3. 京剧正式形成（1840年前后）</h3>
+            <p>经过数十年的发展与融合，京剧在1840年前后正式形成。此时，唱腔、剧本、行当、脸谱、服饰、表演程式等完整体系已经成熟，出现了《定军山》《四郎探母》等经典剧目，生、旦、净、丑行当分工明确，表演规范统一，标志着京剧作为独立剧种正式诞生。</p>
+        </div>
+    </div>
+
+    <div class="item reverse">
+        <img src="../images/清末民国鼎盛.png" alt="" class="item img">
+        <div class="text">
+          <h3>4. 清末民国鼎盛</h3>
+            <p>清末至民国时期，京剧进入全盛时代，从北京走向全国，成为影响力最大的“国剧”。这一时期名家辈出，流派纷呈，梅兰芳、程砚秋、尚小云、荀慧生等艺术大师将京剧推向海外，让京剧成为世界认识中国传统文化的重要符号，真正实现了名扬四海、传承百年。</p>
+        </div>
+    </div>
+</section>
+	
+	<script>
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchText = document.querySelector('.search-input').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            alert(`正在搜索：${searchText}，找到相关结果`);
+        });
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>文化展示</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav-container">
+			<img src="../images/logo.png" alt="LOGO" class="site-logo">
+            <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="../index.html">首页</a></li>
+              <li><a href="文化展示.html" class="active">文化展示</a></li>
+              <li><a href="资源中心.html">资源中心</a></li>
+              <li><a href="趣味学堂.html">趣味学堂</a></li>
+			  <li><a href="社区交流.html">社区交流</a></li>
+          </ul>
+  </div>
+		<button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em></button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+	
+	<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <strong>文化展示</strong></p>
+	
+	<section class="content-section">
+        <h2 class="content-title">文化展示</h2>
+        <p style="color:#666; line-height:1.8; margin-bottom:20px;">
+            京剧，又称平剧、京戏等，是中国影响最大的戏曲剧种，分布地以北京为中心，遍及全国各地。
+            本版块收录了京剧的起源发展、角色行当、表演形式、经典剧目等核心文化内容，带您领略国粹之美。
+        </p>
+        <div class="card-container">
+            <div class="card">
+                <img src="../images/京剧起源.png" alt="京剧起源" class="card-img2">
+                <div class="card-content">
+                  <h3 class="card-title">京剧起源与发展</h3>
+                    <p class="card-desc">京剧形成于清代乾隆年间，融合了徽剧、汉剧等多种地方戏曲，历经两百多年发展成为国粹。</p>
+                    <a href="京剧起源与发展.html" class="card-btn">查看详情</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/京剧生旦净丑.png" alt="角色行当" class="card-img2">
+                <div class="card-content">
+                  <h3 class="card-title">京剧核心艺术特色</h3>
+                    <p class="card-desc">京剧以西皮二黄为唱腔，分生旦净丑行当，以脸谱辨善恶，融唱念做打，配华丽行头，独具戏曲魅力。</p>
+                    <a href="京剧核心艺术特色.html" class="card-btn">查看详情</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/京剧表演形式.png" alt="表演形式" class="card-img2">
+                <div class="card-content">
+                  <h3 class="card-title">京剧开山与代表人物</h3>
+                    <p class="card-desc">京剧由四大徽班进京奠基，程长庚、余三胜、张二奎为开山鼻祖，梅兰芳、程砚秋、尚小云、荀慧生为代表人物。</p>
+                    <a href="京剧开山与代表人物.html" class="card-btn">查看详情</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+	
+	<script>
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchText = document.querySelector('.search-input').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            alert(`正在搜索：${searchText}，找到相关结果`);
+        });
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+</body>
+</html>

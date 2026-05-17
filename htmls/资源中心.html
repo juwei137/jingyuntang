@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资源中心</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header class="header">
+        <div class="nav-container">
+			<img src="../images/logo.png" alt="LOGO" class="site-logo">
+            <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="../index.html">首页</a></li>
+              <li><a href="文化展示.html">文化展示</a></li>
+              <li><a href="资源中心.html" class="active">资源中心</a></li>
+              <li><a href="趣味学堂.html">趣味学堂</a></li>
+			  <li><a href="社区交流.html">社区交流</a></li>
+          </ul>
+  </div>
+		<button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em></button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+	
+	<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <strong>资源中心</strong></p>
+	
+	<section class="content-section">
+        <h2 class="content-title">资源中心</h2>
+        <p style="color:#666; line-height:1.8; margin-bottom:20px;">
+            为京剧爱好者提供丰富的学习资源，包括音频、视频、曲谱、文献资料等，满足不同层次的学习需求。
+        </p>
+        <div class="card-container">
+            <div class="card">
+                <img src="../images/京剧音频.png" alt="音频资源" class="card-img">
+                <div class="card-content">
+                  <h3 class="card-title">经典唱段音频</h3>
+                    <p class="card-desc">收录各大流派名家经典唱段，可在线播放或下载。</p>
+                    <a href="经典唱段音频.html" class="card-btn">点击收听</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/京剧剧目.png" alt="视频资源" class="card-img">
+                <div class="card-content">
+                  <h3 class="card-title">完整剧目视频</h3>
+                    <p class="card-desc">高清的完整京剧剧目视频在线观看</p>
+                    <a href="京剧完整剧目.html" class="card-btn">在线观看</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/京剧曲谱.png" alt="曲谱资源" class="card-img">
+                <div class="card-content">
+                  <h3 class="card-title">京剧曲谱大全</h3>
+                    <p class="card-desc">京剧曲谱，适合初学者和专业人员。</p>
+                    <a href="京剧曲谱大全.html" class="card-btn">查看曲谱</a>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<script>
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchText = document.querySelector('.search-input').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            alert(`正在搜索：${searchText}，找到相关结果`);
+        });
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+</body>
+</html>

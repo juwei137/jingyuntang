@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>白娘子 - 京韵堂</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+.badge-icon {
+    position: relative;
+    display: inline-block;
+}
+.badge-icon .badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: #C41E3A;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    font-weight: bold;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    font-family: monospace;
+}
+.comments-section {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #DBC078;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #DBC078;
+    margin-bottom: 15px;
+}
+.comments-header h3 {
+    color: #8B4513;
+    font-size: 18px;
+}
+.comment-input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.comment-input-area input {
+    padding: 10px;
+    border: 1px solid #DBC078;
+    border-radius: 20px;
+    background: #fffbf2;
+    flex: 1;
+}
+.comment-submit-btn {
+    background: #C41E3A;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.comment-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.comment-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.comment-user {
+    font-weight: bold;
+    color: #C41E3A;
+    cursor: pointer;
+}
+.comment-content {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+.comment-time {
+    font-size: 11px;
+    color: #999;
+}
+.comment-delete {
+    color: #f08585;
+    cursor: pointer;
+    font-size: 12px;
+}
+.empty-comments {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+}
+.view-all-btn {
+    background: none;
+    border: none;
+    color: #C41E3A;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body class="music-detail-body">
+
+<button class="back-btn" onclick="history.back()">
+    <i class="fas fa-arrow-left"></i> 返回
+</button>
+
+<header class="header">
+    <div class="nav-container">
+        <img src="../images/logo.png" alt="LOGO" class="site-logo">
+        <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+        <ul class="nav-list">
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="文化展示.html">文化展示</a></li>
+            <li><a href="资源中心.html" class="active">资源中心</a></li>
+            <li><a href="趣味学堂.html">趣味学堂</a></li>
+            <li><a href="社区交流.html">社区交流</a></li>
+        </ul>
+    </div>
+    <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em>
+    </button>
+    <div class="search-wrapper">
+        <input type="text" class="search-input" placeholder="搜索全站内容...">
+        <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<p id="bread">您当前位置 > <a href="../index.html">首页</a> > <a href="资源中心.html">资源中心</a> > <strong>京剧经典唱段-白娘子</strong></p>
+
+<div class="player-container">
+    <div class="vinyl-section">
+        <div class="tonearm-detail" id="tonearm">
+            <svg class="tonearm-svg" viewBox="0 0 220 180">
+                <circle cx="100" cy="15" r="12"/>
+                <path d="M100 27 L 130 103" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <path d="M130 103 L 163 137" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <rect x="153" y="132" width="13" height="23" rx="3"/>
+            </svg>
+        </div>
+        <div class="vinyl-detail" id="vinyl">
+            <div class="vinyl__texture-detail"></div>
+            <div class="vinyl__cover-detail" style="background-image: url('../images/白娘子.png')"></div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <div class="song-header">
+            <h1>白娘子</h1>
+            <div class="song-meta">京剧经典唱段 | 荀慧生 | 荀派名剧</div>
+        </div>
+
+        <div class="lyric-area" id="lyricArea">
+            <p class="lyric-line" data-time="0">【前奏】</p>
+            <p class="lyric-line" data-time="2">【西皮原板】</p>
+            <p class="lyric-line" data-time="3">春光明媚百草生</p>
+            <p class="lyric-line" data-time="22">损却了仙家向道心</p>
+            <p class="lyric-line" data-time="59">心猿意马拴不定</p>
+            <p class="lyric-line" data-time="90">（白）我一向心如止水</p>
+            <p class="lyric-line" data-time="117">今日为何飘摇不定？</p>
+            <p class="lyric-line" data-time="119">也罢</p>
+            <p class="lyric-line" data-time="123">不免下得山去访一俊俏郎君</p>
+            <p class="lyric-line" data-time="124">永做仙家眷属有何不可？</p>
+            <p class="lyric-line" data-time="128">【西皮散板】</p>
+            <p class="lyric-line" data-time="138">修仙不如染红尘</p>
+            <p class="lyric-line" data-time="139">【南梆子】</p>
+            <p class="lyric-line" data-time="159">湖光山色天然景</p>
+            <p class="lyric-line" data-time="161">雨打桃花爱煞了人</p>
+            <p class="lyric-line" data-time="174">对对舟船来得紧</p>
+            <p class="lyric-line" data-time="201">游人好似画中行</p>
+            <p class="lyric-line" data-time="222">古来的才子多题吟</p>
+            <p class="lyric-line" data-time="240">都道西湖上别有春</p>
+            <p class="lyric-line" data-time="258">好叫我风情拿不定</p>
+            <p class="lyric-line" data-time="280">道心损却就动凡心</p>
+        </div>
+    </div>
+</div>
+
+<div class="progress-bar-wrap">
+    <div class="time-show">
+        <span id="currentTime">00:00</span>
+        <span id="totalTime">00:00</span>
+    </div>
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="bottom-control-bar">
+    <div class="music-info-left">
+        <h4>白娘子</h4>
+        <p>演唱：荀慧生</p>
+    </div>
+
+    <div class="music-func-left">
+        <div class="badge-icon">
+            <button class="control-btn collect-btn" id="collectBtn"><i class="far fa-heart"></i></button>
+            <span class="badge" id="favBadge">0</span>
+        </div>
+        <div class="badge-icon">
+            <button class="control-btn" id="commentBtn"><i class="far fa-comment"></i></button>
+            <span class="badge" id="commentBadge">0</span>
+        </div>
+    </div>
+
+    <div class="music-control-center">
+        <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+        <button class="control-btn play-btn" id="playBtn"><i class="fas fa-play"></i></button>
+        <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+    </div>
+
+    <div class="music-func-right">
+        <div class="volume-group">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+        </div>
+        <div class="fontsize-group">
+            <i class="fas fa-text-height"></i>
+            <input type="range" class="fontsize-slider" id="fontsizeSlider" min="14" max="24" value="16">
+        </div>
+        <button class="control-btn" id="downloadBtn"><i class="fas fa-download"></i></button>
+    </div>
+</div>
+
+<div class="comments-section" id="commentsSection" style="display:none;">
+    <div class="comments-header">
+        <h3><i class="fas fa-comments"></i> 精彩评论</h3>
+        <button class="view-all-btn" onclick="closeComments()">收起</button>
+    </div>
+    <div class="comment-input-area">
+        <input type="text" id="commentInput" placeholder="写下你的评论...">
+        <button class="comment-submit-btn" onclick="submitComment()">发表评论</button>
+    </div>
+    <div id="commentList" class="comment-list"></div>
+</div>
+
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+const currentSong = {
+    id: "bnz",
+    name: "白娘子",
+    artist: "荀慧生",
+    type: "荀派名剧",
+    audioUrl: "../audios/bnz.mp3",
+    fileName: "白娘子-荀慧生.mp3"
+};
+
+let audio = null;
+const playBtn = document.getElementById("playBtn");
+const vinyl = document.getElementById("vinyl");
+const tonearm = document.getElementById("tonearm");
+const progressBar = document.getElementById("progressBar");
+const progressBarWrap = document.querySelector(".progress-bar-wrap");
+const lyricArea = document.getElementById("lyricArea");
+const collectBtn = document.getElementById("collectBtn");
+const commentBtn = document.getElementById("commentBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+const fontsizeSlider = document.getElementById("fontsizeSlider");
+const downloadBtn = document.getElementById("downloadBtn");
+const currentTimeEl = document.getElementById("currentTime");
+const totalTimeEl = document.getElementById("totalTime");
+const commentsSection = document.getElementById("commentsSection");
+const commentList = document.getElementById("commentList");
+const commentInput = document.getElementById("commentInput");
+
+let isPlaying = false;
+
+const lyricTime = [0,2,3,22,59,90,117,119,123,124,128,138,139,159,161,174,201,222,240,258,280];
+const lyricLines = document.querySelectorAll(".lyric-line");
+
+function formatTime(s) {
+    let m = Math.floor(s / 60);
+    let sec = Math.floor(s % 60);
+    return (m < 10 ? "0" + m : m) + ":" + (sec < 10 ? "0" + sec : sec);
+}
+
+function initAudio() {
+    audio = new Audio(currentSong.audioUrl);
+    audio.volume = 0.8;
+    audio.addEventListener("loadedmetadata", function() {
+        totalTimeEl.innerText = formatTime(audio.duration);
+    });
+    audio.ontimeupdate = function() {
+        if (!audio.duration) return;
+        let per = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = per + "%";
+        currentTimeEl.innerText = formatTime(audio.currentTime);
+        syncLyric(audio.currentTime);
+    };
+    audio.onended = function() {
+        vinyl.classList.remove("rotate");
+        tonearm.classList.remove("play");
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        isPlaying = false;
+        lyricLines.forEach(l => l.classList.remove("active"));
+        progressBar.style.width = "0%";
+        currentTimeEl.innerText = "00:00";
+        lyricArea.scrollTop = 0;
+    };
+}
+
+playBtn.onclick = function() {
+    if (!audio) initAudio();
+    if (isPlaying) {
+        audio.pause();
+        vinyl.classList.remove("rotate");
+        tonearm.classList.remove("play");
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
+        audio.play();
+        vinyl.classList.add("rotate");
+        tonearm.classList.add("play");
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    isPlaying = !isPlaying;
+};
+
+function setProgress(e) {
+    if (!audio || !audio.duration) return;
+    let rect = progressBarWrap.getBoundingClientRect();
+    let x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    let percent = (x - rect.left) / rect.width;
+    percent = Math.max(0, Math.min(1, percent));
+    audio.currentTime = percent * audio.duration;
+}
+progressBarWrap.addEventListener("mousedown", setProgress);
+progressBarWrap.addEventListener("mousemove", (e) => e.buttons === 1 && setProgress(e));
+progressBarWrap.addEventListener("touchstart", setProgress);
+progressBarWrap.addEventListener("touchmove", setProgress);
+
+function syncLyric(t) {
+    let idx = 0;
+    for (let i = 0; i < lyricTime.length; i++) {
+        if (t >= lyricTime[i]) {
+            idx = i;
+        } else {
+            break;
+        }
+    }
+    lyricLines.forEach(line => line.classList.remove("active"));
+    const activeLine = lyricLines[idx];
+    if (activeLine) activeLine.classList.add("active");
+    if (activeLine) {
+        const areaTop = lyricArea.scrollTop;
+        const areaH = lyricArea.clientHeight;
+        const lineTop = activeLine.offsetTop;
+        const lineH = activeLine.offsetHeight;
+        if (lineTop + lineH > areaTop + areaH - 60) {
+            lyricArea.scrollTop = lineTop - areaH + 120;
+        }
+    }
+}
+
+volumeSlider.oninput = function() {
+    if (audio) audio.volume = this.value / 100;
+};
+
+fontsizeSlider.oninput = function() {
+    lyricArea.style.fontSize = this.value + "px";
+};
+
+function doDownload() {
+    const originalText = downloadBtn.innerHTML;
+    downloadBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
+    downloadBtn.disabled = true;
+    fetch(currentSong.audioUrl, { method: 'HEAD' })
+        .then(response => {
+            if (!response.ok) throw new Error('文件不存在');
+            return fetch(currentSong.audioUrl);
+        })
+        .then(response => response.blob())
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = currentSong.fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            alert(`《${currentSong.name}》开始下载`);
+        })
+        .catch(error => {
+            alert('下载失败！\n音频文件可能不存在');
+        })
+        .finally(() => {
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.disabled = false;
+        });
+}
+
+downloadBtn.onclick = function() {
+    const user = getCurrentUser();
+    if (!user) {
+        if (typeof window.showLoginModal === 'function') {
+            window.showLoginModal(function(success) {
+                if (success) doDownload();
+            }, "下载歌曲需要登录账号");
+        } else {
+            alert("请先登录后下载");
+            window.location.href = '个人中心.html';
+        }
+        return;
+    }
+    doDownload();
+};
+
+function getCurrentUser() {
+    return localStorage.getItem("currentUser") || localStorage.getItem("username");
+}
+
+function getUserNickname(user) {
+    return localStorage.getItem(`nickname_${user}`) || user;
+}
+
+function showLoginModal() {
+    if (typeof window !== 'undefined' && window.showLoginModal) {
+        window.showLoginModal(function(success) {
+            if (success) location.reload();
+        }, "登录后可以收藏歌曲和发表评论");
+    } else {
+        alert("请前往个人中心登录");
+        window.location.href = '个人中心.html';
+    }
+}
+
+function getTotalFavCount() {
+    let totalFavs = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('favorites_')) {
+            const favorites = JSON.parse(localStorage.getItem(key) || '[]');
+            if (favorites.some(fav => fav.name === currentSong.name)) {
+                totalFavs++;
+            }
+        }
+    }
+    return totalFavs;
+}
+
+function updateFavBadge() {
+    const count = getTotalFavCount();
+    const favBadge = document.getElementById("favBadge");
+    if (favBadge) {
+        favBadge.style.display = 'flex';
+        favBadge.innerText = count > 99 ? '99+' : count;
+    }
+}
+
+function updateCollectButtonState() {
+    const user = getCurrentUser();
+    if (user) {
+        const favorites = JSON.parse(localStorage.getItem(`favorites_${user}`) || '[]');
+        const isFavorited = favorites.some(fav => fav.name === currentSong.name);
+        if (isFavorited) {
+            collectBtn.classList.add("active");
+            collectBtn.innerHTML = '<i class="fas fa-heart"></i>';
+        } else {
+            collectBtn.classList.remove("active");
+            collectBtn.innerHTML = '<i class="far fa-heart"></i>';
+        }
+    } else {
+        collectBtn.classList.remove("active");
+        collectBtn.innerHTML = '<i class="far fa-heart"></i>';
+    }
+}
+
+function toggleFavorite() {
+    const user = getCurrentUser();
+    if (!user) {
+        showLoginModal();
+        return;
+    }
+    const favoritesKey = `favorites_${user}`;
+    let favorites = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
+    const existingIndex = favorites.findIndex(fav => fav.name === currentSong.name);
+    if (existingIndex === -1) {
+        favorites.push({
+            name: currentSong.name,
+            artist: currentSong.artist,
+            type: currentSong.type,
+            audioSrc: currentSong.audioUrl,
+            time: new Date().toLocaleString()
+        });
+        collectBtn.classList.add("active");
+        collectBtn.innerHTML = '<i class="fas fa-heart"></i>';
+        alert(`已收藏《${currentSong.name}》`);
+    } else {
+        favorites.splice(existingIndex, 1);
+        collectBtn.classList.remove("active");
+        collectBtn.innerHTML = '<i class="far fa-heart"></i>';
+        alert(`已取消收藏《${currentSong.name}》`);
+    }
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+    updateFavBadge();
+}
+
+collectBtn.onclick = function() {
+    toggleFavorite();
+};
+
+function getCommentsKey() {
+    return `song_comments_${currentSong.id}`;
+}
+
+function getCommentCount() {
+    const comments = JSON.parse(localStorage.getItem(getCommentsKey()) || '[]');
+    return comments.length;
+}
+
+function updateCommentBadge() {
+    const count = getCommentCount();
+    const commentBadge = document.getElementById("commentBadge");
+    if (commentBadge) {
+        commentBadge.style.display = 'flex';
+        commentBadge.innerText = count > 99 ? '99+' : count;
+    }
+}
+
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem(getCommentsKey()) || '[]');
+    updateCommentBadge();
+    if (comments.length === 0) {
+        commentList.innerHTML = '<div class="empty-comments"><i class="fas fa-comment-dots"></i><p>暂无评论，快来发表第一条评论吧！</p></div>';
+        return;
+    }
+    let html = '';
+    comments.slice().reverse().forEach(comment => {
+        const user = getUserNickname(comment.user);
+        html += `
+        <div class="comment-item" data-comment-id="${comment.id}">
+            <div style="flex:1;">
+                <div class="comment-user" onclick="viewUserProfile('${comment.user}')">
+                    ${escapeHtml(user)}
+                </div>
+                <div class="comment-content">${escapeHtml(comment.content)}</div>
+                <div class="comment-time">${comment.date}</div>
+            </div>
+            ${comment.user === getCurrentUser() ? `<span class="comment-delete" onclick="deleteComment('${comment.id}')">删除</span>` : ''}
+        </div>`;
+    });
+    commentList.innerHTML = html;
+}
+
+function submitComment() {
+    const user = getCurrentUser();
+    if (!user) {
+        showLoginModal();
+        return;
+    }
+    const content = commentInput.value.trim();
+    if (!content) {
+        alert("请输入评论内容");
+        return;
+    }
+    const commentsKey = getCommentsKey();
+    const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+    const newComment = {
+        id: Date.now(),
+        user: user,
+        content: content,
+        date: new Date().toLocaleString()
+    };
+    comments.push(newComment);
+    localStorage.setItem(commentsKey, JSON.stringify(comments));
+    commentInput.value = '';
+    loadComments();
+    updateCommentBadge();
+    alert("评论发表成功！");
+}
+
+function deleteComment(commentId) {
+    if (!confirm("确定要删除这条评论吗？")) return;
+    const comments = JSON.parse(localStorage.getItem(getCommentsKey()) || '[]');
+    const newComments = comments.filter(c => c.id != commentId);
+    localStorage.setItem(getCommentsKey(), JSON.stringify(newComments));
+    loadComments();
+    updateCommentBadge();
+    alert("评论已删除");
+}
+
+function toggleComments() {
+    if (commentsSection.style.display === 'none' || commentsSection.style.display === '') {
+        commentsSection.style.display = 'block';
+        loadComments();
+    } else {
+        commentsSection.style.display = 'none';
+    }
+}
+
+function closeComments() {
+    commentsSection.style.display = 'none';
+}
+
+commentBtn.onclick = function() {
+    toggleComments();
+};
+
+function viewUserProfile(user) {
+    const currentUser = getCurrentUser();
+    if (user === currentUser) {
+        window.location.href = '个人中心.html';
+    } else {
+        alert(`查看用户 ${getUserNickname(user)} 的资料`);
+    }
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    updateCollectButtonState();
+    updateFavBadge();
+    updateCommentBadge();
+    commentsSection.style.display = 'none';
+    initAudio();
+});
+
+document.querySelector('.search-btn').addEventListener('click', function() {
+    const searchText = document.querySelector('.search-input').value.trim();
+    if (!searchText) {
+        alert('请输入搜索内容');
+        return;
+    }
+    alert(`正在搜索：${searchText}，找到相关结果`);
+});
+document.querySelector('.search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        document.querySelector('.search-btn').click();
+    }
+});
+</script>
+
+</body>
+</html>

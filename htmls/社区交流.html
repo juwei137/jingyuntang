@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>社区交流</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style> 
+.content-title {
+    font-size: 22px;
+    color: #b81c22;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #d4b886;
+}
+
+.community-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px 30px 30px 30px !important;
+    display: flex;
+    gap: 20px;
+    background: #f8f3e9 !important;
+}
+.left-side {
+    width: 260px;
+}
+.center-main {
+    flex: 1;
+}
+.right-side {
+    width: 240px;
+}
+
+.comm-card {
+    background: #faf5eb !important;
+    border: 1px solid #e9e0cf !important;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+.comm-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #b81c22;
+    border-left: 4px solid #b81c22;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.publish-box textarea {
+    width: 100%;
+    height: 90px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    background: #fffbf2;
+    resize: none;
+    margin-bottom: 10px;
+}
+.publish-btn {
+    background: #b81c22;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #e9e0cf;
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.post-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ddd;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.post-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.post-avatar i {
+    font-size: 24px;
+    color: #fff;
+}
+.post-info {
+    flex: 1;
+}
+.post-name {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.post-name .follow-btn {
+    background: none;
+    border: 1px solid #b81c22;
+    color: #b81c22;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.post-name .follow-btn.following {
+    background: #b81c22;
+    color: #fff;
+}
+.post-time {
+    font-size: 12px;
+    color: #999;
+}
+.post-content {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    padding-left: 57px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.post-tool {
+    display: flex;
+    gap: 25px;
+    color: #666;
+    padding-left: 57px;
+}
+.post-tool span {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.post-tool span:hover {
+    color: #b81c22;
+}
+.post-tool span.liked {
+    color: #e74c3c;
+}
+.post-tool i {
+    margin-right: 5px;
+}
+
+.comment-area {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9e0cf;
+    display: none;
+    padding-left: 57px;
+}
+.comment-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.comment-input input {
+    flex: 1;
+    padding: 8px;
+    background: #fffbf2;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.comment-btn {
+    background: #b81c22;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.comment-list {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.comment-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+.comment-user {
+    font-weight: bold;
+    color: #b81c22;
+    cursor: pointer;
+}
+.comment-time {
+    font-size: 11px;
+    color: #999;
+}
+.comment-delete {
+    color: #f08585;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.follow-user-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.follow-user-item:last-child {
+    border-bottom: none;
+}
+.follow-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ddd;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.follow-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.follow-info {
+    flex: 1;
+    cursor: pointer;
+}
+.follow-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+.follow-stats {
+    font-size: 11px;
+    color: #999;
+}
+.unfollow-btn {
+    background: #f08585;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 11px;
+}
+.follow-btn-sm {
+    background: #DBC078;
+    border: none;
+    padding: 3px 12px;
+    border-radius: 15px;
+    color: #333;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.login-tip {
+    text-align: center;
+    padding: 30px;
+    background: #fff8e1;
+    border-radius: 8px;
+    color: #8B4513;
+}
+.login-tip button {
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 350px;
+    max-width: 90%;
+    padding: 25px;
+    text-align: center;
+}
+.share-modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 450px;
+    max-width: 90%;
+    padding: 25px;
+}
+.share-modal textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    border: 1px solid #DBC078;
+    border-radius: 8px;
+    resize: vertical;
+    margin: 15px 0;
+    font-family: inherit;
+}
+.share-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.share-modal-buttons button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .community-wrap {
+        flex-direction: column;
+    }
+    .left-side, .right-side {
+        width: 100%;
+    }
+    .post-content, .post-tool, .comment-area {
+        padding-left: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+    <div class="nav-container">
+        <img src="../images/logo.png" alt="LOGO" class="site-logo">
+        <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+        <ul class="nav-list">
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="文化展示.html">文化展示</a></li>
+            <li><a href="资源中心.html">资源中心</a></li>
+            <li><a href="趣味学堂.html">趣味学堂</a></li>
+            <li><a href="社区交流.html" class="active">社区交流</a></li>
+        </ul>
+    </div>
+    <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em>
+    </button>
+    <div class="search-wrapper">
+        <input type="text" class="search-input" placeholder="搜索全站内容...">
+        <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <strong>社区交流</strong></p>
+
+<section class="content-section">
+    <h2 class="content-title"><i class="fas fa-users"></i> 社区交流</h2>
+    <p style="color:#666; line-height:1.8; margin-bottom:20px;">
+        京剧爱好者的交流平台，可发布帖子、分享心得、点赞评论、关注戏友，以戏会友。
+    </p>
+    
+    <div id="loginTip" class="login-tip" style="display:none;">
+        <i class="fas fa-info-circle"></i> 登录后可发布帖子、点赞评论、关注戏友
+        <div><button onclick="showLoginModal()"><i class="fas fa-sign-in-alt"></i> 立即登录</button></div>
+    </div>
+
+    <div id="communityContent" style="display:block;">
+        <div class="community-wrap">
+            <div class="left-side">
+                <div class="comm-card">
+                    <div class="comm-title"><i class="fas fa-user-circle"></i> 我的资料</div>
+                    <div id="profileArea" style="text-align:center;"></div>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title"><i class="fas fa-heart"></i> 我的关注</div>
+                    <div id="followList"></div>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title"><i class="fas fa-users"></i> 我的粉丝</div>
+                    <div id="fansList"></div>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title"><i class="fas fa-fire"></i> 热门话题</div>
+                    <div># 京剧唱腔</div>
+                    <div># 戏服化妆</div>
+                    <div># 经典剧目</div>
+                    <div># 线下交流</div>
+                </div>
+            </div>
+
+            <div class="center-main">
+                <div class="comm-card publish-box">
+                    <textarea id="postContent" placeholder="分享你的京剧心得、图片、活动..."></textarea>
+                    <button class="publish-btn" onclick="publishPost()"><i class="fas fa-paper-plane"></i> 发布帖子</button>
+                </div>
+                <div class="comm-card" id="postList"></div>
+            </div>
+
+            <div class="right-side">
+                <div class="comm-card">
+                    <div class="comm-title"><i class="fas fa-star"></i> 推荐关注</div>
+                    <div id="recommendList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 京韵堂 版权所有</p>
+</footer>
+
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+// ==================== 全局变量 ====================
+let currentUser = null;
+let allPosts = [];
+
+// ==================== 获取用户信息（修复头像读取） ====================
+function getCurrentUser() {
+    return localStorage.getItem("currentUser") || localStorage.getItem("username");
+}
+
+function isLoggedIn() {
+    return localStorage.getItem("jyLogin") === "true" || getCurrentUser() !== null;
+}
+
+function getUserAvatar(user) {
+    // 修复：正确读取头像数据
+    const avatar = localStorage.getItem(`avatar_${user}`);
+    if (avatar && avatar !== 'null' && avatar !== 'undefined' && avatar !== '') {
+        return avatar;
+    }
+    return null;
+}
+
+function getUserAvatarHtml(user) {
+    const avatarData = getUserAvatar(user);
+    if (avatarData) {
+        return `<img src="${avatarData}" alt="${user}">`;
+    }
+    return `<i class="fas fa-user"></i>`;
+}
+
+function getUserNickname(user) {
+    return localStorage.getItem(`nickname_${user}`) || user;
+}
+
+function getUserStats(user) {
+    const posts = JSON.parse(localStorage.getItem(`user_posts_${user}`) || '[]');
+    const follows = JSON.parse(localStorage.getItem(`follows_${user}`) || '[]');
+    const fans = getFansList(user);
+    return { posts: posts.length, follows: follows.length, fans: fans.length };
+}
+
+function getFansList(user) {
+    let fans = [];
+    for(let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if(key && key.startsWith('follows_')) {
+            const otherUser = key.replace('follows_', '');
+            const follows = JSON.parse(localStorage.getItem(key) || '[]');
+            if(follows.includes(user)) fans.push(otherUser);
+        }
+    }
+    return fans;
+}
+
+// ==================== 同步个人中心删除的帖子 ====================
+function syncDeletedPosts() {
+    const user = currentUser;
+    if (!user) return;
+    
+    const userPostsKey = `user_posts_${user}`;
+    const savedPosts = JSON.parse(localStorage.getItem(userPostsKey) || '[]');
+    const savedPostIds = savedPosts.map(p => p.id);
+    
+    const communityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    let modified = false;
+    
+    for (let i = communityPosts.length - 1; i >= 0; i--) {
+        if (communityPosts[i].author === user && !savedPostIds.includes(communityPosts[i].id)) {
+            communityPosts.splice(i, 1);
+            modified = true;
+        }
+    }
+    
+    if (modified) {
+        localStorage.setItem('community_posts', JSON.stringify(communityPosts));
+        loadPosts();
+        updateLeftSide();
+    }
+}
+
+// ==================== 更新个人中心帖子统计（同步点赞评论数） ====================
+function updateUserPostStats(user) {
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const userPosts = posts.filter(p => p.author === user);
+    const userPostsKey = `user_posts_${user}`;
+    const updatedPosts = userPosts.map(p => ({
+        id: p.id,
+        title: p.content.substring(0, 30) + (p.content.length > 30 ? '...' : ''),
+        content: p.content,
+        date: p.date,
+        likes: (p.likes || []).length,
+        comments: (p.comments || []).length
+    }));
+    localStorage.setItem(userPostsKey, JSON.stringify(updatedPosts.slice(0, 50)));
+}
+
+// ==================== 加载帖子 ====================
+function loadPosts() {
+    syncDeletedPosts();
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    allPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    renderPosts();
+}
+
+function renderPosts() {
+    const container = document.getElementById('postList');
+    if (allPosts.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:40px; color:#999;"><i class="fas fa-comment-dots"></i><p>暂无帖子，快来发布第一条吧！</p></div>';
+        return;
+    }
+    
+    let html = '';
+    allPosts.forEach(post => {
+        const isLiked = currentUser && (post.likes || []).includes(currentUser);
+        const likeCount = (post.likes || []).length;
+        const commentCount = (post.comments || []).length;
+        const isFollowing = currentUser && (JSON.parse(localStorage.getItem(`follows_${currentUser}`) || '[]')).includes(post.author);
+        
+        html += `
+        <div class="post-item" data-post-id="${post.id}">
+            <div class="post-header">
+                <div class="post-avatar" onclick="viewUserProfile('${post.author}')">
+                    ${getUserAvatarHtml(post.author)}
+                </div>
+                <div class="post-info">
+                    <div class="post-name">
+                        <span onclick="viewUserProfile('${post.author}')" style="cursor:pointer;">${escapeHtml(getUserNickname(post.author))}</span>
+                        ${post.author !== currentUser ? `<button class="follow-btn ${isFollowing ? 'following' : ''}" onclick="toggleFollow('${post.author}', this)">${isFollowing ? '已关注' : '关注'}</button>` : ''}
+                    </div>
+                    <div class="post-time">${post.date}</div>
+                </div>
+            </div>
+            <div class="post-content">${escapeHtml(post.content)}</div>
+            <div class="post-tool">
+                <span class="${isLiked ? 'liked' : ''}" onclick="${currentUser ? `toggleLike('${post.id}', this)` : 'showLoginModal()'}">
+                    <i class="fas fa-heart"></i> ${likeCount}
+                </span>
+                <span onclick="toggleCommentArea('${post.id}')">
+                    <i class="fas fa-comment"></i> ${commentCount}
+                </span>
+                <span onclick="${currentUser ? `openShareModal('${post.id}')` : 'showLoginModal()'}">
+                    <i class="fas fa-share"></i> 转发
+                </span>
+                ${post.author === currentUser ? `<span onclick="deletePostFromCommunity('${post.id}')" style="color:#f08585;"><i class="fas fa-trash"></i> 删除</span>` : ''}
+            </div>
+            <div class="comment-area" id="commentArea-${post.id}">
+                <div class="comment-input">
+                    <input type="text" id="commentInput-${post.id}" placeholder="写下你的评论...">
+                    <button class="comment-btn" onclick="addComment('${post.id}')">评论</button>
+                </div>
+                <div class="comment-list" id="commentList-${post.id}">
+                    ${renderComments(post.comments || [], post.id)}
+                </div>
+            </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+}
+
+function renderComments(comments, postId) {
+    if (!comments || comments.length === 0) return '<div style="color:#999; text-align:center; padding:10px;">暂无评论</div>';
+    return comments.map(comment => `
+        <div class="comment-item">
+            <div>
+                <span class="comment-user" onclick="viewUserProfile('${comment.user}')" style="cursor:pointer;">${escapeHtml(getUserNickname(comment.user))}</span>: 
+                ${escapeHtml(comment.content)}
+                <span class="comment-time">${comment.date}</span>
+            </div>
+            ${comment.user === currentUser ? `<span class="comment-delete" onclick="deleteComment('${comment.id}', '${postId}')">删除</span>` : ''}
+        </div>
+    `).join('');
+}
+
+// ==================== 删除帖子 ====================
+function deletePostFromCommunity(postId) {
+    if (!confirm("确定要删除这条帖子吗？")) return;
+    
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const newPosts = posts.filter(p => p.id != postId);
+    localStorage.setItem('community_posts', JSON.stringify(newPosts));
+    
+    const userPostsKey = `user_posts_${currentUser}`;
+    let userPosts = JSON.parse(localStorage.getItem(userPostsKey) || '[]');
+    userPosts = userPosts.filter(p => p.id != postId);
+    localStorage.setItem(userPostsKey, JSON.stringify(userPosts));
+    
+    loadPosts();
+    updateLeftSide();
+    alert("帖子已删除");
+}
+
+// ==================== 发布帖子 ====================
+function publishPost() {
+    if (!currentUser) { showLoginModal(); return; }
+    const content = document.getElementById('postContent').value.trim();
+    if (!content) { alert("请输入帖子内容！"); return; }
+    const post = {
+        id: Date.now(),
+        author: currentUser,
+        content: content,
+        date: new Date().toLocaleString(),
+        likes: [],
+        comments: []
+    };
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    posts.unshift(post);
+    localStorage.setItem('community_posts', JSON.stringify(posts));
+    
+    updateUserPostStats(currentUser);
+    
+    document.getElementById('postContent').value = '';
+    loadPosts();
+    updateLeftSide();
+    alert("发布成功！");
+}
+function toggleLike(postId, element) {
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const postIndex = posts.findIndex(p => p.id == postId);
+    if (postIndex === -1) return;
+    
+    if (!posts[postIndex].likes) posts[postIndex].likes = [];
+    const likeIndex = posts[postIndex].likes.indexOf(currentUser);
+    
+    if (likeIndex === -1) {
+        posts[postIndex].likes.push(currentUser);
+        element.classList.add('liked');
+    } else {
+        posts[postIndex].likes.splice(likeIndex, 1);
+        element.classList.remove('liked');
+    }
+    
+    localStorage.setItem('community_posts', JSON.stringify(posts));
+    const likeCount = posts[postIndex].likes.length;
+    element.innerHTML = `<i class="fas fa-heart"></i> ${likeCount}`;
+    
+    // 同步更新个人中心的帖子统计
+    updateUserPostStats(posts[postIndex].author);
+}
+
+// ==================== 评论（同步个人中心） ====================
+function addComment(postId) {
+    if (!currentUser) { showLoginModal(); return; }
+    const input = document.getElementById(`commentInput-${postId}`);
+    const content = input.value.trim();
+    if (!content) { alert("请输入评论内容"); return; }
+    
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const postIndex = posts.findIndex(p => p.id == postId);
+    if (postIndex === -1) return;
+    
+    if (!posts[postIndex].comments) posts[postIndex].comments = [];
+    const comment = {
+        id: Date.now(),
+        user: currentUser,
+        content: content,
+        date: new Date().toLocaleString(),
+        postId: postId
+    };
+    posts[postIndex].comments.push(comment);
+    localStorage.setItem('community_posts', JSON.stringify(posts));
+    
+    input.value = '';
+    renderCommentList(postId, posts[postIndex].comments);
+    
+    const commentCount = posts[postIndex].comments.length;
+    const commentSpan = document.querySelector(`.post-item[data-post-id="${postId}"] .post-tool span:nth-child(2)`);
+    if (commentSpan) {
+        commentSpan.innerHTML = `<i class="fas fa-comment"></i> ${commentCount}`;
+    }
+    
+    // 同步更新个人中心的帖子统计
+    updateUserPostStats(posts[postIndex].author);
+}
+
+function renderCommentList(postId, comments) {
+    const container = document.getElementById(`commentList-${postId}`);
+    if (container) {
+        container.innerHTML = renderComments(comments, postId);
+    }
+}
+
+function deleteComment(commentId, postId) {
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const postIndex = posts.findIndex(p => p.id == postId);
+    if (postIndex === -1) return;
+    
+    posts[postIndex].comments = posts[postIndex].comments.filter(c => c.id != commentId);
+    localStorage.setItem('community_posts', JSON.stringify(posts));
+    renderCommentList(postId, posts[postIndex].comments);
+    
+    const commentCount = posts[postIndex].comments.length;
+    const commentSpan = document.querySelector(`.post-item[data-post-id="${postId}"] .post-tool span:nth-child(2)`);
+    if (commentSpan) {
+        commentSpan.innerHTML = `<i class="fas fa-comment"></i> ${commentCount}`;
+    }
+    
+    updateUserPostStats(posts[postIndex].author);
+}
+
+function toggleCommentArea(postId) {
+    const area = document.getElementById(`commentArea-${postId}`);
+    if (area) {
+        area.style.display = area.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// ==================== 转发 ====================
+function openShareModal(postId) {
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const post = posts.find(p => p.id == postId);
+    if (!post) return;
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="share-modal">
+            <h3 style="color:#8B4513; margin-bottom:10px;"><i class="fas fa-share-alt"></i> 转发帖子</h3>
+            <p style="color:#666; font-size:13px; margin-bottom:10px;">原帖内容：${escapeHtml(post.content.substring(0, 80))}${post.content.length > 80 ? '...' : ''}</p>
+            <textarea id="shareContent" placeholder="添加你的想法...（可选）"></textarea>
+            <div class="share-modal-buttons">
+                <button id="shareConfirmBtn" style="background:#C41E3A; color:#fff;">确认转发</button>
+                <button id="shareCancelBtn" style="background:#ccc;">取消</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('shareConfirmBtn').onclick = function() {
+        const additionalContent = document.getElementById('shareContent').value.trim();
+        sharePost(postId, additionalContent);
+        modal.remove();
+    };
+    
+    document.getElementById('shareCancelBtn').onclick = function() {
+        modal.remove();
+    };
+}
+
+function sharePost(postId, additionalContent) {
+    if (!currentUser) { showLoginModal(); return; }
+    
+    const posts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const post = posts.find(p => p.id == postId);
+    if (!post) return;
+    
+    let shareContent = `转发：${post.content.substring(0, 150)}${post.content.length > 150 ? '...' : ''}\n（转发自 @${getUserNickname(post.author)}）`;
+    if (additionalContent) {
+        shareContent = additionalContent + '\n\n' + shareContent;
+    }
+    
+    const newPost = {
+        id: Date.now(),
+        author: currentUser,
+        content: shareContent,
+        date: new Date().toLocaleString(),
+        likes: [],
+        comments: [],
+        isShare: true,
+        originalId: postId
+    };
+    
+    posts.unshift(newPost);
+    localStorage.setItem('community_posts', JSON.stringify(posts));
+    
+    updateUserPostStats(currentUser);
+    
+    loadPosts();
+    updateLeftSide();
+    alert("转发成功！");
+}
+
+// ==================== 关注功能 ====================
+function toggleFollow(targetUser, btnElement) {
+    if (!currentUser) { showLoginModal(); return; }
+    if (targetUser === currentUser) { alert("不能关注自己"); return; }
+    
+    const followsKey = `follows_${currentUser}`;
+    let follows = JSON.parse(localStorage.getItem(followsKey) || '[]');
+    const isFollowing = follows.includes(targetUser);
+    
+    if (isFollowing) {
+        follows = follows.filter(u => u !== targetUser);
+        btnElement.classList.remove('following');
+        btnElement.innerText = '关注';
+        alert(`已取消关注 ${getUserNickname(targetUser)}`);
+    } else {
+        follows.push(targetUser);
+        btnElement.classList.add('following');
+        btnElement.innerText = '已关注';
+        alert(`已关注 ${getUserNickname(targetUser)}`);
+    }
+    
+    localStorage.setItem(followsKey, JSON.stringify(follows));
+    updateLeftSide();
+    updateRecommendList();
+    renderPosts();
+}
+
+// ==================== 查看用户资料 ====================
+function viewUserProfile(targetUser) {
+    if (targetUser === currentUser) {
+        window.location.href = '个人中心.html';
+        return;
+    }
+    
+    const nickname = getUserNickname(targetUser);
+    const stats = getUserStats(targetUser);
+    const follows = JSON.parse(localStorage.getItem(`follows_${currentUser}`) || '[]');
+    const isFollowing = follows.includes(targetUser);
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="user-modal">
+            <div style="width:80px; height:80px; border-radius:50%; margin:0 auto 15px; background:#ddd; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                ${getUserAvatarHtml(targetUser)}
+            </div>
+            <h3 style="color:#8B4513;">${escapeHtml(nickname)}</h3>
+            <p style="color:#666;">@${escapeHtml(targetUser)}</p>
+            <div style="display:flex; justify-content:space-around; margin:20px 0;">
+                <div><strong>${stats.posts}</strong><br><span style="font-size:12px;">帖子</span></div>
+                <div><strong>${stats.follows}</strong><br><span style="font-size:12px;">关注</span></div>
+                <div><strong>${stats.fans}</strong><br><span style="font-size:12px;">粉丝</span></div>
+            </div>
+            <button id="profileFollowBtn" style="background:${isFollowing ? '#999' : '#C41E3A'}; color:#fff; border:none; padding:8px 30px; border-radius:30px; cursor:pointer; margin-right:10px;">
+                ${isFollowing ? '已关注' : '关注'}
+            </button>
+            <button onclick="this.closest('.modal-overlay').remove()" style="background:#eee; border:none; padding:8px 20px; border-radius:30px; cursor:pointer;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('profileFollowBtn').onclick = function() {
+        const followBtn = document.querySelector(`.follow-btn[onclick*="${targetUser}"]`);
+        if (followBtn) {
+            toggleFollow(targetUser, followBtn);
+        } else {
+            const followsKey = `follows_${currentUser}`;
+            let newFollows = JSON.parse(localStorage.getItem(followsKey) || '[]');
+            if (isFollowing) {
+                newFollows = newFollows.filter(u => u !== targetUser);
+                alert(`已取消关注 ${nickname}`);
+            } else {
+                newFollows.push(targetUser);
+                alert(`已关注 ${nickname}`);
+            }
+            localStorage.setItem(followsKey, JSON.stringify(newFollows));
+        }
+        modal.remove();
+        updateLeftSide();
+        updateRecommendList();
+        renderPosts();
+    };
+}
+
+// ==================== 更新左侧个人资料 ====================
+function updateLeftSide() {
+    if (!currentUser) return;
+    
+    const avatarHtml = getUserAvatarHtml(currentUser);
+    const nickname = getUserNickname(currentUser);
+    const stats = getUserStats(currentUser);
+    
+    const profileHtml = `
+        <div style="width:70px; height:70px; border-radius:50%; margin:0 auto 10px; overflow:hidden; background:#ddd; display:flex; align-items:center; justify-content:center;">
+            ${avatarHtml}
+        </div>
+        <div style="font-weight:bold; font-size:16px;">${escapeHtml(nickname)}</div>
+        <div style="color:#999; font-size:11px; margin-bottom:10px;">@${escapeHtml(currentUser)}</div>
+        <div style="display:flex; justify-content:space-around; margin:10px 0;">
+            <div><strong>${stats.posts}</strong><br><span style="font-size:11px;">帖子</span></div>
+            <div><strong>${stats.follows}</strong><br><span style="font-size:11px;">关注</span></div>
+            <div><strong>${stats.fans}</strong><br><span style="font-size:11px;">粉丝</span></div>
+        </div>
+        <button onclick="window.location.href='个人中心.html'" style="background:#DBC078; border:none; padding:5px 15px; border-radius:20px; cursor:pointer; margin-top:5px; font-size:12px;"><i class="fas fa-user-edit"></i> 编辑资料</button>
+    `;
+    document.getElementById('profileArea').innerHTML = profileHtml;
+    
+    // 更新关注列表
+    const follows = JSON.parse(localStorage.getItem(`follows_${currentUser}`) || '[]');
+    const followContainer = document.getElementById('followList');
+    if (follows.length === 0) {
+        followContainer.innerHTML = '<div style="text-align:center; color:#999; padding:15px;">暂无关注</div>';
+    } else {
+        let followHtml = '';
+        follows.slice(0, 5).forEach(f => {
+            followHtml += `
+            <div class="follow-user-item">
+                <div class="follow-avatar" onclick="viewUserProfile('${f}')">${getUserAvatarHtml(f)}</div>
+                <div class="follow-info" onclick="viewUserProfile('${f}')">
+                    <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                    <div class="follow-stats">@${escapeHtml(f)}</div>
+                </div>
+                <button class="unfollow-btn" onclick="toggleFollow('${f}', this)">取消</button>
+            </div>`;
+        });
+        if (follows.length > 5) {
+            followHtml += `<div style="text-align:center; padding-top:10px;"><a href="#" onclick="showAllFollows()">查看全部 ${follows.length} 人</a></div>`;
+        }
+        followContainer.innerHTML = followHtml;
+    }
+    
+    // 更新粉丝列表
+    const fans = getFansList(currentUser);
+    const fansContainer = document.getElementById('fansList');
+    if (fans.length === 0) {
+        fansContainer.innerHTML = '<div style="text-align:center; color:#999; padding:15px;">暂无粉丝</div>';
+    } else {
+        let fansHtml = '';
+        fans.slice(0, 5).forEach(f => {
+            fansHtml += `
+            <div class="follow-user-item">
+                <div class="follow-avatar" onclick="viewUserProfile('${f}')">${getUserAvatarHtml(f)}</div>
+                <div class="follow-info" onclick="viewUserProfile('${f}')">
+                    <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                    <div class="follow-stats">@${escapeHtml(f)}</div>
+                </div>
+            </div>`;
+        });
+        if (fans.length > 5) {
+            fansHtml += `<div style="text-align:center; padding-top:10px;"><a href="#" onclick="showAllFans()">查看全部 ${fans.length} 人</a></div>`;
+        }
+        fansContainer.innerHTML = fansHtml;
+    }
+}
+
+function showAllFollows() {
+    const user = currentUser;
+    if (!user) return;
+    const follows = JSON.parse(localStorage.getItem(`follows_${user}`) || '[]');
+    if (follows.length === 0) { alert("暂无关注"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; width:400px; max-width:90%; max-height:80%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;"><i class="fas fa-heart"></i> 我的关注 (${follows.length})</h3>
+            ${follows.map(f => `
+                <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #eee;">
+                    <div style="width:40px; height:40px; border-radius:50%; background:#ddd; display:flex; align-items:center; justify-content:center; overflow:hidden;">${getUserAvatarHtml(f)}</div>
+                    <div style="flex:1;" onclick="viewUserProfile('${f}'); modal.remove();">
+                        <div style="font-weight:bold;">${escapeHtml(getUserNickname(f))}</div>
+                        <div style="font-size:12px; color:#999;">@${escapeHtml(f)}</div>
+                    </div>
+                    <button onclick="toggleFollow('${f}', this); modal.remove();" style="background:#f08585; border:none; padding:4px 12px; border-radius:20px; color:#fff; cursor:pointer;">取消</button>
+                </div>
+            `).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer; width:100%;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function showAllFans() {
+    const user = currentUser;
+    if (!user) return;
+    const fans = getFansList(user);
+    if (fans.length === 0) { alert("暂无粉丝"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; width:400px; max-width:90%; max-height:80%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;"><i class="fas fa-users"></i> 我的粉丝 (${fans.length})</h3>
+            ${fans.map(f => `
+                <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #eee;">
+                    <div style="width:40px; height:40px; border-radius:50%; background:#ddd; display:flex; align-items:center; justify-content:center; overflow:hidden;">${getUserAvatarHtml(f)}</div>
+                    <div style="flex:1;" onclick="viewUserProfile('${f}'); modal.remove();">
+                        <div style="font-weight:bold;">${escapeHtml(getUserNickname(f))}</div>
+                        <div style="font-size:12px; color:#999;">@${escapeHtml(f)}</div>
+                    </div>
+                </div>
+            `).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer; width:100%;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// ==================== 更新推荐列表 ====================
+function updateRecommendList() {
+    const allUsers = new Set();
+    for(let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if(key && (key.startsWith('nickname_') || key === 'currentUser')) {
+            if(key.startsWith('nickname_')) allUsers.add(key.replace('nickname_', ''));
+        }
+    }
+    if (currentUser) allUsers.delete(currentUser);
+    
+    const follows = JSON.parse(localStorage.getItem(`follows_${currentUser}`) || '[]');
+    const recommend = Array.from(allUsers).filter(u => !follows.includes(u)).slice(0, 5);
+    
+    const container = document.getElementById('recommendList');
+    if (recommend.length === 0) {
+        container.innerHTML = '<div style="text-align:center; color:#999; padding:15px;">暂无推荐</div>';
+    } else {
+        let html = '';
+        recommend.forEach(r => {
+            html += `
+            <div class="follow-user-item">
+                <div class="follow-avatar" onclick="viewUserProfile('${r}')">${getUserAvatarHtml(r)}</div>
+                <div class="follow-info" onclick="viewUserProfile('${r}')">
+                    <div class="follow-name">${escapeHtml(getUserNickname(r))}</div>
+                    <div class="follow-stats">@${escapeHtml(r)}</div>
+                </div>
+                <button class="follow-btn-sm" onclick="toggleFollow('${r}', this)">关注</button>
+            </div>`;
+        });
+        container.innerHTML = html;
+    }
+}
+
+// ==================== 登录弹窗 ====================
+function showLoginModal() {
+    if (typeof window !== 'undefined' && window.showLoginModal) {
+        window.showLoginModal(function(success) {
+            if (success) location.reload();
+        }, "登录后可以发布帖子、点赞评论、关注戏友");
+    } else {
+        alert("请前往个人中心登录");
+        window.location.href = '个人中心.html';
+    }
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// ==================== 搜索功能 ====================
+document.querySelector('.search-btn').addEventListener('click', function() {
+    const searchText = document.querySelector('.search-input').value.trim();
+    if (!searchText) { alert('请输入搜索内容'); return; }
+    alert(`正在搜索：${searchText}，找到相关结果`);
+});
+document.querySelector('.search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') document.querySelector('.search-btn').click();
+});
+
+// ==================== 导航栏高亮 ====================
+function setNavActive() {
+    document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
+    const navLinks = document.querySelectorAll('.nav-list a');
+    for(let link of navLinks) {
+        if(link.innerText.trim() === '社区交流') {
+            link.classList.add('active');
+            break;
+        }
+    }
+}
+
+// ==================== 初始化 ====================
+function init() {
+    setNavActive();
+    currentUser = getCurrentUser();
+    
+    if (isLoggedIn()) {
+        document.getElementById('loginTip').style.display = 'none';
+        document.getElementById('communityContent').style.display = 'block';
+        loadPosts();
+        updateLeftSide();
+        updateRecommendList();
+    } else {
+        document.getElementById('loginTip').style.display = 'block';
+        document.getElementById('communityContent').style.display = 'none';
+    }
+}
+
+init();
+</script>
+</body>
+</html>

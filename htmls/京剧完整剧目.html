@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>京剧完整剧目</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #fdf6e3;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 28px;
+            color: #9b0000;
+            margin-bottom: 37px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 103px;
+            margin-bottom: 13px;
+            padding: 13px;
+            border: 3px solid #e6c2a8;
+            border-radius: 12px;
+            background-color: #F1F3E;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .item.reverse {
+            flex-direction: row-reverse;
+        }
+        /* 视频容器样式 - 用于嵌入B站iframe */
+        .video-container {
+            width: 31%;
+            position: relative;
+            padding-bottom: 17.4%; /* 31% 宽度的 56.25% 比例 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 13px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .text {
+            width: 53%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            text-align: left; 
+        }
+        .text h3 {
+            font-size: 20px;
+            color: #9b0000;
+            margin-bottom: 12px;
+        }
+        .text p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+        }
+        @media (max-width:768px) {
+            .item, .item.reverse {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .video-container, .text {
+                width: 100%;
+            }
+            .video-container {
+                padding-bottom: 56.25%; /* 手机上视频占满宽度，保持16:9 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <img src="../images/logo.png" alt="LOGO" class="site-logo">
+            <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="../index.html">首页</a></li>
+              <li><a href="文化展示.html">文化展示</a></li>
+              <li><a href="资源中心.html" class="active">资源中心</a></li>
+              <li><a href="趣味学堂.html">趣味学堂</a></li>
+              <li><a href="社区交流.html">社区交流</a></li>
+          </ul>
+        </div>
+        <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+            <em class="fas fa-user"></em>
+        </button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+    
+    <p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <a href="资源中心.html">资源中心</a> > <strong>京剧完整剧目</strong></p>
+    
+    <section class="content-section">
+        <h2 class="content-title">京剧完整剧目</h2>
+        <p style="color:#666; line-height:1.3; margin-bottom:13px;">
+            京剧作为中国传统文化的瑰宝，其经典剧目承载着丰富的历史与艺术价值
+        </p>
+
+        <div class="item">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?bvid=BV1ya411n7hg&page=1&high_quality=1&danmaku=0&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>1. 霸王别姬</h3>
+                <p>讲述了西楚霸王项羽在垓下被汉军围困，四面楚歌，他与爱妃虞姬在军帐中饮酒作别。虞姬为了不拖累项羽，拔剑自刎，项羽悲痛万分，最终也自刎而死。 这是生旦对儿戏的巅峰之作，充满了悲壮的爱情色彩。</p>
+            </div>
+        </div>
+        
+        <div class="item reverse">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=770290153&p=3&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>2. 贵妃醉酒</h3>
+                <p>描绘了唐玄宗宠妃杨玉环在百花亭设宴，本想与寿王王子饮酒作乐，却得知唐玄宗要来，心生嫉妒，借着酒意在殿中独舞，借酒消愁的故事。 这部剧是旦角的看家戏，展现了杨贵妃的华贵、娇媚与内心的孤寂。</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=770207258&p=1&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>3. 穆桂英挂帅</h3>
+                <p>讲述了巾帼英雄穆桂英在丈夫战死后，为了保家卫国，毅然挂帅出征的故事。 这部剧展现了女性的英勇气魄，是武戏和文戏结合得非常好的作品。</p>
+            </div>
+        </div>
+
+        <!-- 4. 四郎探母 - 请替换 bvid -->
+        <div class="item reverse">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=770304716&p=4&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>4. 四郎探母</h3>
+                <p>来自杨家将的故事。杨家四郎杨延辉在战场上被辽国擒获，改名换姓，与铁镜公主成婚。十五年后，他得知母亲佘太君率军来到边关，冒险回到宋营与母亲相见，一夜之间与亲人团聚，天亮后又不得不返回辽国。 这部剧情感真挚，唱段脍炙人口，是全家老少都能看懂的亲情戏。</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=770331902&p=5&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>5. 凤还巢</h3>
+                <p>故事发生在明朝，退休的兵部侍郎程浦有两位千金：程雪娥 （妾室所生，但貌美聪慧，是程浦的掌上明珠）和程雪雁 （夫人亲生，却貌丑心机，举止粗鲁）。程浦对故友之子、风度翩翩的穆居易十分欣赏，想将女儿程雪娥许配给他。 但程夫人偏心，坚持要先嫁自己的亲生女儿程雪雁。于是，一连串的误会和错位就此展开……</p>
+            </div>
+        </div>
+
+        <div class="item reverse">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=770568860&p=11&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>6. 西施</h3>
+                <p>讲述了春秋时期，越国美女西施在国家危亡之际，忍辱负重，与范蠡一起献身国家，最终帮助越王勾践复国成功，然后二人归隐的故事。 这部剧是梅兰芳先生的代表作之一，唱腔和身段都极具美感。</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="video-container">
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=215849001&bvid=BV1ya411n7hg&cid=771316319&p=30&autoplay=0" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
+            <div class="text">
+                <h3>7. 花木兰</h3>
+                <p>因父亲年迈无法从军，她女扮男装代父出征。在战场上她既要隐瞒身份，又要杀敌，这就比一般人更加艰难。可喜的是花木兰最终还是完成了自己的使命，立下赫赫战功。战争结束后，她拒绝封赏，返回家乡，成为后世传颂的传奇人物。</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchText = document.querySelector('.search-input').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            alert(`正在搜索：${searchText}，找到相关结果`);
+        });
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="../js/common.js"></script>
+
+    <footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+</body>
+</html>

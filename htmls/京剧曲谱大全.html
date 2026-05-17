@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>京剧曲谱大全</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+/* 弹窗遮罩 */
+.score-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    overflow: hidden;
+}
+/* 关闭按钮 */
+.score-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 36px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* 图片上方按钮栏 —— 白色背景 */
+.score-controls {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    gap: 12px;
+}
+.score-controls button {
+    background: #fff; /* 白色背景 */
+    border: none;
+    outline: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.score-controls button:hover {
+    background: #eee; /* hover 浅灰 */
+}
+/* 强制下载按钮光标为手形，不继承放大镜 */
+#downloadScore {
+    cursor: pointer !important;
+}
+
+/* 可缩放拖拽图片容器 */
+#scoreWrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#scoreImg {
+    cursor: grab;
+    transition: transform 0.1s ease;
+}
+#scoreImg:active {
+    cursor: grabbing;
+}
+</style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav-container">
+			<img src="../images/logo.png" alt="LOGO" class="site-logo">
+            <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="../index.html">首页</a></li>
+              <li><a href="文化展示.html">文化展示</a></li>
+              <li><a href="资源中心.html" class="active">资源中心</a></li>
+              <li><a href="趣味学堂.html">趣味学堂</a></li>
+			  <li><a href="社区交流.html">社区交流</a></li>
+          </ul>
+        </div>
+		<button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em></button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+	
+	<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <a href="资源中心.html">资源中心</a> > <strong>京剧曲谱大全</strong></p>
+	
+	<section class="content-section">
+        <h2 class="content-title">京剧曲谱大全</h2>
+        <p style="color:#666; line-height:1.3; margin-bottom:13px;">
+            京剧作为中国传统文化的瑰宝，其经典曲谱承载着丰富的唱腔与艺术价值，是学习和传承京剧艺术的重要资料。
+        </p>
+
+        <div style="max-width:1000px; margin:0 auto;">
+
+            <!-- 1 霸王别姬 -->
+            <div style="display:flex; align-items:center; gap:30px; margin-bottom:50px; padding:20px; border:2px solid #e6c2a8; border-radius:12px; background-color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                <img src="../images/霸王别姬简谱.jpg" style="width:50%; height:220px; border-radius:8px; object-fit:cover;" alt="霸王别姬曲谱">
+                <div style="width:50%;">
+                  <h3 style="font-size:20px; color:#9b0000; margin-bottom:12px;">霸王别姬</h3>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">梅派悲剧经典，旋律凄美婉转、哀而不伤，刻画虞姬温婉柔情与乱世无奈。曲谱标注完整，适合演唱与伴奏练习。</p>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">调号：1=G 4/4 | 板式：西皮</p>
+                    <a href="javascript:;" class="open-score" data-img="../images/霸王别姬简谱.jpg" style="display:inline-block; padding:8px 16px; background-color:#9b0000; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;">查看曲谱</a>
+              </div>
+          </div>
+
+            <!-- 2 唱脸谱 反向 -->
+            <div style="display:flex; align-items:center; flex-direction:row-reverse; gap:30px; margin-bottom:50px; padding:20px; border:2px solid #e6c2a8; border-radius:12px; background-color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                <img src="../images/唱脸谱简谱.jpg" style="width:50%; height:220px; border-radius:8px; object-fit:cover;" alt="唱脸谱曲谱">
+                <div style="width:50%;">
+                  <h3 style="font-size:20px; color:#9b0000; margin-bottom:12px;">唱脸谱</h3>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">女声独唱京歌，旋律明快诙谐，生动展现京剧脸谱的色彩与角色文化，是普及京剧的经典作品。</p>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">调号：1=♭B 4/4 | 速度：150</p>
+                    <a href="javascript:;" class="open-score" data-img="../images/唱脸谱简谱.jpg" style="display:inline-block; padding:8px 16px; background-color:#9b0000; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;">查看曲谱</a>
+              </div>
+          </div>
+
+            <!-- 3 梨花颂 -->
+            <div style="display:flex; align-items:center; gap:30px; margin-bottom:50px; padding:20px; border:2px solid #e6c2a8; border-radius:12px; background-color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                <img src="../images/梨花颂简谱.jpg" style="width:50%; height:220px; border-radius:8px; object-fit:cover;" alt="梨花颂曲谱">
+                <div style="width:50%;">
+                  <h3 style="font-size:20px; color:#9b0000; margin-bottom:12px;">梨花颂</h3>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">京歌经典，旋律优美典雅，以梨花意象描绘杨贵妃的凄美爱情，兼具京剧韵味与流行传唱度。</p>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">调号：1=A 2/4 | 中速</p>
+                    <a href="javascript:;" class="open-score" data-img="../images/梨花颂简谱.jpg" style="display:inline-block; padding:8px 16px; background-color:#9b0000; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;">查看曲谱</a>
+              </div>
+          </div>
+
+            <!-- 4 卖水 反向 -->
+            <div style="display:flex; align-items:center; flex-direction:row-reverse; gap:30px; margin-bottom:50px; padding:20px; border:2px solid #e6c2a8; border-radius:12px; background-color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                <img src="../images/卖水简谱.jpg" style="width:50%; height:220px; border-radius:8px; object-fit:cover;" alt="卖水曲谱">
+                <div style="width:50%;">
+                  <h3 style="font-size:20px; color:#9b0000; margin-bottom:12px;">卖水（清早起来）</h3>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">京剧《卖水》选段，西皮流水板式，节奏明快活泼，以花名串联的方式展现少女的灵动俏皮。</p>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">板式：西皮流水 | 1/4拍</p>
+                    <a href="javascript:;" class="open-score" data-img="../images/卖水简谱.jpg" style="display:inline-block; padding:8px 16px; background-color:#9b0000; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;">查看曲谱</a>
+              </div>
+          </div>
+
+            <!-- 5 西厢记 -->
+          <div style="display:flex; align-items:center; gap:30px; margin-bottom:50px; padding:20px; border:2px solid #e6c2a8; border-radius:12px; background-color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                <img src="../images/西厢记简谱.jpg" style="width:50%; height:220px; border-radius:8px; object-fit:cover;" alt="西厢记曲谱">
+                <div style="width:50%;">
+                  <h3 style="font-size:20px; color:#9b0000; margin-bottom:12px;">西厢记</h3>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">京剧传统剧目选段，尺调腔风格，唱腔婉转细腻，将古典爱情的含蓄与深情演绎得淋漓尽致。</p>
+                    <p style="font-size:16px; line-height:1.7; color:#333; margin-bottom:10px;">调号：1=G 4/4 | 板式：尺调腔</p>
+                    <a href="javascript:;" class="open-score" data-img="../images/西厢记简谱.jpg" style="display:inline-block; padding:8px 16px; background-color:#9b0000; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;">查看曲谱</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 曲谱弹窗结构 + 白色按钮 + 修复下载与光标 -->
+    <div class="score-modal">
+        <div class="score-controls">
+            <button id="zoomIn"><i class="fas fa-plus-circle"></i> 放大</button>
+            <button id="zoomOut"><i class="fas fa-minus-circle"></i> 缩小</button>
+            <button id="downloadScore"><i class="fas fa-download"></i> 下载简谱</button>
+        </div>
+        <span class="score-close"><i class="fas fa-times"></i></span>
+        <div id="scoreWrap">
+            <img id="scoreImg" src="" alt="曲谱大图">
+        </div>
+    </div>
+	
+	<script>
+        // 搜索功能
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchText = document.querySelector('.search-input').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            alert(`正在搜索：${searchText}，找到相关结果`);
+        });
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+
+        // 弹窗缩放拖拽逻辑
+        const modal = document.querySelector('.score-modal');
+        const scoreImg = document.getElementById('scoreImg');
+        const closeBtn = document.querySelector('.score-close');
+        const openBtns = document.querySelectorAll('.open-score');
+        
+        // 手动放大缩小按钮
+        const zoomIn = document.getElementById('zoomIn');
+        const zoomOut = document.getElementById('zoomOut');
+        const downloadBtn = document.getElementById('downloadScore');
+
+        let scale = 1;
+        let startX = 0, startY = 0;
+        let moveX = 0, moveY = 0;
+        let isDrag = false;
+        let currentImageUrl = '';
+
+        // 重置缩放位置
+        function resetImg() {
+            scale = 1;
+            moveX = 0;
+            moveY = 0;
+            scoreImg.style.transform = `translate(${moveX}px,${moveY}px) scale(${scale})`;
+        }
+
+        // 更新图片缩放
+        function updateTransform() {
+            scoreImg.style.transform = `translate(${moveX}px,${moveY}px) scale(${scale})`;
+        }
+
+        // 打开弹窗
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', function(){
+                currentImageUrl = this.getAttribute('data-img');
+                scoreImg.src = currentImageUrl;
+                resetImg();
+                modal.style.display = 'block';
+            });
+        });
+
+        // 关闭弹窗
+        closeBtn.addEventListener('click', function(){
+            modal.style.display = 'none';
+        });
+        modal.addEventListener('click', function(e){
+            if(e.target === modal){
+                modal.style.display = 'none';
+            }
+        });
+
+        // 滚轮缩放
+        scoreImg.addEventListener('wheel', function(e){
+            e.preventDefault();
+            if(e.deltaY < 0){
+                scale = Math.min(scale + 0.1, 3);
+            }else{
+                scale = Math.max(scale - 0.1, 0.5);
+            }
+            updateTransform();
+        });
+
+        // 手动放大
+        zoomIn.addEventListener('click', function() {
+            scale = Math.min(scale + 0.2, 3);
+            updateTransform();
+        });
+
+        // 手动缩小
+        zoomOut.addEventListener('click', function() {
+            scale = Math.max(scale - 0.2, 0.5);
+            updateTransform();
+        });
+
+        // 修复：强制下载（解决只预览不下载、光标变放大镜）
+        downloadBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // 阻止事件冒泡，避免触发图片的放大镜光标
+            if (!currentImageUrl) return;
+            // 用新窗口+a标签强制下载
+            const a = document.createElement('a');
+            a.href = currentImageUrl;
+            a.download = '京剧简谱_' + Date.now() + '.jpg'; // 唯一文件名
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        // 拖拽开始
+        scoreImg.addEventListener('mousedown', function(e){
+            isDrag = true;
+            startX = e.clientX - moveX;
+            startY = e.clientY - moveY;
+        });
+
+        // 拖拽移动
+        document.addEventListener('mousemove', function(e){
+            if(!isDrag) return;
+            moveX = e.clientX - startX;
+            moveY = e.clientY - startY;
+            updateTransform();
+        });
+
+        // 拖拽结束
+        document.addEventListener('mouseup', function(){
+            isDrag = false;
+        });
+    </script>
+<script type="text/javascript" src="../js/common.js"></script>
+	
+	<footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+</body>
+</html>

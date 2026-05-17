@@ -1,0 +1,901 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>知识问答 - 京韵堂</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+/* 知识问答页面样式 */
+.quiz-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.page-title {
+    text-align: center;
+    color: #8B4513;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+.level-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.level-btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    background: #e8f5e9;
+    color: #333;
+    transition: all 0.3s;
+}
+.level-btn.active {
+    background: #8B4513;
+    color: white;
+}
+.level-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}
+.level-btn:not(.disabled):hover {
+    background: #DBC078;
+    transform: scale(1.02);
+}
+.question-box {
+    border: 2px solid #DBC078;
+    border-radius: 16px;
+    padding: 30px;
+    margin: 20px 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.progress {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #8B4513;
+    font-weight: bold;
+}
+.question {
+    font-size: 22px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 500;
+}
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.option {
+    padding: 14px 18px;
+    border: 1px solid #DBC078;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    background: #fffbf2;
+}
+.option:hover {
+    background-color: #FFEFDD;
+    border-color: #8B4513;
+    transform: translateX(5px);
+}
+.result {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    display: none;
+}
+.correct-result {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+.wrong-result {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+.explain {
+    background: #fff8e1;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    line-height: 1.6;
+    display: none;
+    border: 1px solid #DBC078;
+    font-size: 14px;
+}
+.next-btn {
+    padding: 12px 28px;
+    background: #8B4513;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+.next-btn:hover {
+    background: #6b3410;
+    transform: scale(1.02);
+}
+.final-result {
+    text-align: center;
+    font-size: 24px;
+    margin: 30px 0;
+    color: #8B4513;
+    display: none;
+}
+.text-center {
+    text-align: center;
+}
+.login-tip {
+    text-align: center;
+    padding: 15px;
+    background: #fff8e1;
+    border-radius: 8px;
+    margin: 15px 0;
+    color: #8B4513;
+    border: 1px solid #DBC078;
+}
+.login-tip button {
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* 排行榜和历史记录区域 */
+.stats-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #DBC078;
+}
+.stats-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.stats-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #DBC078;
+    background: #fff;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #8B4513;
+    min-width: 200px;
+}
+.stats-toggle-btn:hover {
+    background: #DBC078;
+    color: #333;
+    transform: scale(1.02);
+}
+.stats-content {
+    display: none;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #DBC078;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+.stats-content.show {
+    display: block;
+}
+.filter-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.filter-label {
+    font-size: 12px;
+    color: #999;
+    margin-right: 5px;
+    line-height: 28px;
+}
+.filter-btn {
+    padding: 4px 14px;
+    border: 1px solid #DBC078;
+    background: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 12px;
+}
+.filter-btn.active {
+    background: #8B4513;
+    color: #fff;
+    border-color: #8B4513;
+}
+.filter-btn:hover {
+    background: #DBC078;
+}
+.record-item, .rank-item {
+    padding: 10px;
+    border-bottom: 1px dashed #DBC078;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+.record-item:last-child, .rank-item:last-child {
+    border-bottom: none;
+}
+.record-mode, .rank-mode {
+    font-weight: bold;
+    color: #C41E3A;
+    font-size: 13px;
+}
+.record-detail, .rank-detail {
+    font-size: 11px;
+    color: #666;
+    margin-top: 3px;
+}
+.record-score, .rank-score {
+    float: right;
+    color: #8B4513;
+    font-weight: bold;
+}
+.empty-tip {
+    color: #999;
+    text-align: center;
+    padding: 30px 15px;
+}
+.clear-btn {
+    background: #f08585;
+    color: #fff;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+}
+.clear-btn:hover {
+    background: #e06767;
+}
+.current-filter-info {
+    font-size: 11px;
+    color: #C41E3A;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+.scroll-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+.restart-btn {
+    background: #DBC078;
+    color: #333;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+.restart-btn:hover {
+    background: #c9a858;
+    transform: scale(1.02);
+}
+.nav-list li a.active {
+    color: #DBC078 !important;
+    border-bottom: 3px solid #DBC078 !important;
+}
+.user-icon-btn.active {
+    color: #DBC078 !important;
+}
+
+@media (max-width: 768px) {
+    .question { font-size: 18px; }
+    .option { font-size: 14px; padding: 10px 14px; }
+    .stats-toggle-btn { padding: 10px 20px; font-size: 14px; min-width: 160px; }
+    .stats-buttons { gap: 15px; }
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+    <div class="nav-container">
+        <img src="../images/logo.png" alt="LOGO" class="site-logo">
+        <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+        <ul class="nav-list">
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="文化展示.html">文化展示</a></li>
+            <li><a href="资源中心.html">资源中心</a></li>
+            <li><a href="趣味学堂.html" class="active">趣味学堂</a></li>
+            <li><a href="社区交流.html">社区交流</a></li>
+        </ul>
+    </div>
+    <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em>
+    </button>
+    <div class="search-wrapper">
+        <input type="text" class="search-input" placeholder="搜索全站内容...">
+        <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <a href="趣味学堂.html">趣味学堂</a> > <strong>知识问答</strong></p>
+
+<section class="content-section">
+        <h2 class="content-title">京剧知识问答</h2>
+        <p style="color:#666; line-height:1.3; margin-bottom:13px;">通过答题闯关，轻松学习国粹知识，感受京剧独特的艺术魅力与文化底蕴。</p>	
+<div class="quiz-container">
+    <h2 class="page-title"><i class="fas fa-brain"></i> 京剧知识闯关游戏</h2>
+
+    <!-- 登录提示（未登录时显示） -->
+    <div id="loginTip" class="login-tip" style="display:none;">
+        <i class="fas fa-info-circle"></i> 登录后可查看排行榜和历史记录，成绩将同步到个人中心
+        <button onclick="showLoginModal()"><i class="fas fa-sign-in-alt"></i> 立即登录</button>
+    </div>
+
+    <!-- 难度选择 -->
+    <div class="level-box">
+        <button class="level-btn" id="easy">🎯 简单模式</button>
+        <button class="level-btn disabled" id="medium">⭐ 中等模式</button>
+        <button class="level-btn disabled" id="hard">🔥 困难模式</button>
+    </div>
+
+    <!-- 游戏区域 -->
+    <div class="question-box" id="gameBox" style="display:none;">
+        <div class="progress" id="progress">第1题 / 共7题</div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="result" id="result"></div>
+        <div class="explain" id="explain"></div>
+        <button class="next-btn" id="nextBtn">下一题 <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <!-- 最终结果 -->
+    <div class="final-result" id="finalResult"></div>
+
+    <!-- 重新开始按钮 -->
+    <div class="text-center" style="margin: 20px 0;">
+        <button id="restart-btn" class="restart-btn" onclick="restartAll()"><i class="fas fa-redo-alt"></i> 重新开始闯关</button>
+    </div>
+
+    <!-- 排行榜和历史记录区域 -->
+    <div class="stats-section">
+        <div class="stats-buttons">
+            <button class="stats-toggle-btn collapsed" id="rankToggleBtn" onclick="toggleRankPanel()">
+                <i class="fas fa-trophy"></i> 知识排行榜
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="stats-toggle-btn collapsed" id="recordToggleBtn" onclick="toggleRecordPanel()">
+                <i class="fas fa-history"></i> 我的闯关记录
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <!-- 排行榜面板 -->
+        <div id="rankPanel" class="stats-content">
+            <div class="filter-group">
+                <span class="filter-label">难度：</span>
+                <button class="filter-btn active" data-rank-difficulty="all">全部</button>
+                <button class="filter-btn" data-rank-difficulty="easy">简单</button>
+                <button class="filter-btn" data-rank-difficulty="medium">中等</button>
+                <button class="filter-btn" data-rank-difficulty="hard">困难</button>
+            </div>
+            <div id="rankList" class="scroll-list"></div>
+            <div class="current-filter-info" id="rankFilterInfo"></div>
+        </div>
+        
+        <!-- 历史记录面板 -->
+        <div id="recordPanel" class="stats-content">
+            <div class="filter-group">
+                <span class="filter-label">筛选：</span>
+                <button class="filter-btn active" data-record-filter="all">全部</button>
+                <button class="filter-btn" data-record-filter="easy">简单模式</button>
+                <button class="filter-btn" data-record-filter="medium">中等模式</button>
+                <button class="filter-btn" data-record-filter="hard">困难模式</button>
+            </div>
+            <div id="recordList" class="scroll-list"></div>
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="clear-btn" onclick="clearQuizRecord()">清空历史记录</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<footer>
+    <p>&copy; 2026 京韵堂 版权所有</p>
+</footer>
+
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+// ==================== 全局变量 ====================
+let currentRankDifficulty = 'all';
+let currentRecordFilter = 'all';
+let isRankOpen = false;
+let isRecordOpen = false;
+
+// 当前游戏状态
+let currentLevel = "";
+let currentQuestions = [];
+let currentIndex = 0;
+let correctCount = 0;
+let unlockStatus = { easy: true, medium: false, hard: false };
+
+// ==================== 题库 ====================
+const questionBank = {
+    easy: [
+        { q: "京剧的脸谱中，红色通常代表什么？", o: ["忠勇正义", "阴险奸诈", "刚愎自用", "豪爽鲁莽"], a: 0, exp: "京剧红色脸谱代表忠勇正义，代表人物关羽；白色代表阴险奸诈（曹操），黑色代表正直刚烈（包拯）。" },
+        { q: "京剧形成于哪个朝代？", o: ["唐朝", "宋朝", "清朝", "明朝"], a: 2, exp: "京剧形成于清代乾隆末年，由徽剧与汉剧融合，吸收昆曲、秦腔等特点形成。" },
+        { q: "京剧的四大行当不包括以下哪个？", o: ["生", "旦", "净", "侠"], a: 3, exp: "京剧四大行当是生、旦、净、丑，生是男性角色，旦是女性角色，净是花脸，丑是丑角。" },
+        { q: "京剧表演的四项基本功是？", o: ["说学逗唱", "唱念做打", "吹拉弹唱", "琴棋书画"], a: 1, exp: "京剧四项基本功为唱（演唱）、念（念白）、做（身段）、打（武打）。" },
+        { q: "京剧被称为什么？", o: ["百戏之祖", "国剧", "南戏", "杂剧"], a: 1, exp: "京剧是中国国粹，被称为国剧，昆曲被称为百戏之祖。" },
+        { q: "旦角中扮演年轻活泼少女的是？", o: ["青衣", "花旦", "老旦", "武旦"], a: 1, exp: "花旦扮演年轻活泼少女；青衣扮演端庄女性；老旦扮演老年女性；武旦擅长武打。" },
+        { q: "京剧的主要伴奏乐器是？", o: ["二胡", "京胡", "古筝", "琵琶"], a: 1, exp: "京胡是京剧核心伴奏乐器，音色高亢明亮，适配京剧唱腔。" },
+        { q: "包拯在京剧里属于什么行当？", o: ["生", "旦", "净", "丑"], a: 2, exp: "包拯是净角（花脸），以黑色脸谱为主，代表刚正不阿。" },
+        { q: "京剧舞台上的“一桌二椅”主要作用是？", o: ["休息用", "象征场景", "装饰用", "道具存放"], a: 1, exp: "京剧一桌二椅是写意道具，可代表城门、高山、床榻等多种场景。" },
+        { q: "丑角在京剧里的脸谱特点是？", o: ["全脸彩色", "只有鼻子一块白", "全黑", "全红"], a: 1, exp: "丑角脸谱特点是鼻子处一块白色，俗称豆腐块，区分于净角大脸谱。" }
+    ],
+    medium: [
+        { q: "“梅尚程荀”是京剧四大什么流派？", o: ["生角", "旦角", "净角", "丑角"], a: 1, exp: "梅（梅兰芳）、尚（尚小云）、程（程砚秋）、荀（荀慧生）是京剧四大名旦。" },
+        { q: "《霸王别姬》中的虞姬属于什么行当？", o: ["花旦", "青衣", "武旦", "刀马旦"], a: 1, exp: "虞姬属于青衣，以端庄典雅的唱念为主，是梅派经典角色。" },
+        { q: "京剧唱腔主要分为哪两大类？", o: ["西皮、二黄", "快板、慢板", "原板、散板", "南腔、北调"], a: 0, exp: "京剧核心唱腔为西皮（明快）、二黄（深沉），是区分剧目的主要唱腔。" },
+        { q: "孙悟空在京剧里属于什么行当？", o: ["武生", "文生", "小生", "老生"], a: 0, exp: "孙悟空属于武生，擅长翻打跌扑等武打动作，也叫猴戏。" },
+        { q: "以下哪部是京剧经典传统剧目？", o: ["《天仙配》", "《贵妃醉酒》", "《花木兰》", "《刘三姐》"], a: 1, exp: "《贵妃醉酒》是梅兰芳代表作，属于京剧经典；其余为黄梅戏/豫剧。" },
+        { q: "净角中的“铜锤花脸”侧重什么？", o: ["武打", "演唱", "身段", "念白"], a: 1, exp: "铜锤花脸以唱功为主，代表人物徐延昭；架子花脸侧重身段表演。" },
+        { q: "京剧念白分为哪两种？", o: ["韵白、京白", "独白、对白", "快白、慢白", "方言、普通话"], a: 0, exp: "京剧念白分韵白（典雅）、京白（口语化），韵白多用于正派角色。" }
+    ],
+    hard: [
+        { q: "西皮流水板的特点是？", o: ["节奏缓慢", "节奏明快、叙事性强", "悲伤低沉", "高亢激昂"], a: 1, exp: "西皮流水板节奏明快、一字一音，常用于叙述情节、对话场景。" },
+        { q: "程派唱腔的核心特点是？", o: ["婉转华丽", "深沉幽怨、低回婉转", "刚劲有力", "清脆明亮"], a: 1, exp: "程派（程砚秋）唱腔深沉幽怨、低回婉转，擅长悲剧女性角色。" },
+        { q: "京剧“水袖”主要作用是？", o: ["装饰", "表达情绪、增强身段", "防晒", "保暖"], a: 1, exp: "水袖是旦角服装延伸，用于表达情绪、美化身段，是重要表演道具。" },
+        { q: "以下哪项属于京剧“做”功？", o: ["高声演唱", "翻跟头", "身段手势", "念台词"], a: 2, exp: "做指身段、手势、表情等表演；打指武打翻扑；唱念是唱与念白。" },
+        { q: "京剧脸谱中，蓝色代表？", o: ["忠勇", "刚强骁勇", "奸诈", "正直"], a: 1, exp: "蓝色脸谱代表刚强骁勇、桀骜不驯，代表人物窦尔敦。" },
+        { q: "《空城计》中诸葛亮使用的唱腔是？", o: ["西皮慢板", "二黄原板", "西皮二六", "二黄慢板"], a: 2, exp: "《空城计》诸葛亮核心唱段为西皮二六，节奏稳健、沉稳大气。" },
+        { q: "京剧“把子功”是指？", o: ["唱功练习", "武打兵器技巧", "身段练习", "道具使用"], a: 1, exp: "把子功是京剧武打兵器表演技巧，是武生、武旦必修基本功。" }
+    ]
+};
+
+// ==================== DOM元素 ====================
+const levelBtns = {
+    easy: document.getElementById("easy"),
+    medium: document.getElementById("medium"),
+    hard: document.getElementById("hard")
+};
+const gameBox = document.getElementById("gameBox");
+const progressText = document.getElementById("progress");
+const questionText = document.getElementById("question");
+const optionsBox = document.getElementById("options");
+const resultBox = document.getElementById("result");
+const explainBox = document.getElementById("explain");
+const nextBtn = document.getElementById("nextBtn");
+const finalResult = document.getElementById("finalResult");
+
+// ==================== 游戏函数 ====================
+function startGame(level) {
+    if (!unlockStatus[level]) {
+        alert("请先完成上一难度闯关！");
+        return;
+    }
+    currentLevel = level;
+    currentIndex = 0;
+    correctCount = 0;
+    const allQues = [...questionBank[level]];
+    for (let i = allQues.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allQues[i], allQues[j]] = [allQues[j], allQues[i]];
+    }
+    currentQuestions = allQues.slice(0, 7);
+    gameBox.style.display = "block";
+    finalResult.style.display = "none";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const q = currentQuestions[currentIndex];
+    progressText.textContent = `第${currentIndex + 1}题 / 共7题`;
+    questionText.textContent = q.q;
+    optionsBox.innerHTML = "";
+    resultBox.style.display = "none";
+    explainBox.style.display = "none";
+    nextBtn.style.display = "none";
+    q.o.forEach((opt, i) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.textContent = opt;
+        div.onclick = () => checkAnswer(i);
+        optionsBox.appendChild(div);
+    });
+}
+
+function checkAnswer(select) {
+    const q = currentQuestions[currentIndex];
+    const isCorrect = select === q.a;
+    resultBox.style.display = "block";
+    explainBox.style.display = "block";
+    nextBtn.style.display = "block";
+    if (isCorrect) {
+        resultBox.textContent = "✓ 回答正确！";
+        resultBox.className = "result correct-result";
+        correctCount++;
+    } else {
+        resultBox.textContent = "✗ 回答错误，正确答案：" + q.o[q.a];
+        resultBox.className = "result wrong-result";
+    }
+    explainBox.textContent = q.exp;
+    document.querySelectorAll(".option").forEach(opt => opt.style.pointerEvents = "none");
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < 7) loadQuestion();
+    else endGame();
+});
+
+function endGame() {
+    gameBox.style.display = "none";
+    finalResult.style.display = "block";
+    const pass = correctCount >= 4;
+    const passText = pass ? "🎉 闯关成功！" : "😢 闯关失败，请重试";
+    finalResult.innerHTML = `
+        <div style="font-size:28px; margin-bottom:15px;">${passText}</div>
+        <div style="font-size:20px;">答对 ${correctCount} / 7 题</div>
+        <div style="font-size:16px; color:#999; margin-top:10px;">得分：${Math.floor(correctCount/7*100)}分</div>
+    `;
+    if (pass && currentLevel === "easy") unlockStatus.medium = true;
+    if (pass && currentLevel === "medium") unlockStatus.hard = true;
+    updateLevelBtn();
+    
+    // 保存记录到个人中心（使用与个人中心一致的存储格式）
+    if (isQuizLoggedIn()) {
+        saveQuizRecordToPersonalCenter();
+    }
+    renderQuizRank();
+    renderQuizRecord();
+}
+
+function updateLevelBtn() {
+    for (let key in unlockStatus) {
+        if (levelBtns[key]) {
+            if (unlockStatus[key]) levelBtns[key].classList.remove("disabled");
+            else levelBtns[key].classList.add("disabled");
+        }
+    }
+}
+
+function restartAll() {
+    gameBox.style.display = "none";
+    finalResult.style.display = "none";
+    currentLevel = "";
+    currentQuestions = [];
+    currentIndex = 0;
+    correctCount = 0;
+}
+
+// ==================== 登录状态检查 ====================
+function isQuizLoggedIn() {
+    return localStorage.getItem("jyLogin") === "true" || 
+           localStorage.getItem("currentUser") !== null ||
+           localStorage.getItem("username") !== null;
+}
+
+function getQuizUser() {
+    return localStorage.getItem("currentUser") || localStorage.getItem("username");
+}
+
+function showLoginModal() {
+    if (typeof window !== 'undefined' && window.showLoginModal) {
+        window.showLoginModal(function(success) {
+            if (success) location.reload();
+        }, "查看排行榜和历史记录需要登录");
+    } else {
+        alert("请前往个人中心登录");
+        window.location.href = '个人中心.html';
+    }
+}
+
+function updateLoginTip() {
+    const loginTip = document.getElementById('loginTip');
+    if (!isQuizLoggedIn()) {
+        if (loginTip) loginTip.style.display = 'block';
+    } else {
+        if (loginTip) loginTip.style.display = 'none';
+    }
+}
+
+// ==================== 保存记录到个人中心（使用与个人中心一致的格式） ====================
+function saveQuizRecordToPersonalCenter() {
+    const user = getQuizUser();
+    if (!user) return;
+    
+    const levelName = { easy: "简单", medium: "中等", hard: "困难" }[currentLevel];
+    const score = Math.floor(correctCount / 7 * 100);
+    const historyKey = `quiz_history_${user}`;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    
+    history.unshift({
+        date: new Date().toLocaleString(),
+        level: currentLevel,
+        levelName: levelName,
+        correct: correctCount,
+        total: 7,
+        score: score,
+        pass: correctCount >= 4
+    });
+    
+    if (history.length > 50) history = history.slice(0, 50);
+    localStorage.setItem(historyKey, JSON.stringify(history));
+    
+    // 保存到排行榜（按难度分开存储）
+    const rankKey = `quiz_rank_${currentLevel}`;
+    let rank = JSON.parse(localStorage.getItem(rankKey) || '[]');
+    
+    rank.push({
+        user: user,
+        score: correctCount,
+        total: 7,
+        percent: score,
+        date: new Date().toLocaleString()
+    });
+    
+    // 按得分排序，取前20名
+    rank.sort((a, b) => b.score - a.score);
+    if (rank.length > 20) rank = rank.slice(0, 20);
+    localStorage.setItem(rankKey, JSON.stringify(rank));
+    
+    console.log("成绩已保存到个人中心:", { level: levelName, score: score });
+}
+
+// ==================== 渲染历史记录 ====================
+function renderQuizRecord() {
+    const user = getQuizUser();
+    const list = document.getElementById("recordList");
+    
+    if (!user) {
+        list.innerHTML = `<div class="empty-tip"><i class="fas fa-lock"></i> 请先登录查看历史记录</div>`;
+        return;
+    }
+    
+    // 使用与个人中心一致的存储key
+    let records = JSON.parse(localStorage.getItem(`quiz_history_${user}`) || '[]');
+    
+    if (currentRecordFilter !== 'all') {
+        records = records.filter(r => r.level === currentRecordFilter);
+    }
+    
+    if (records.length === 0) {
+        let filterText = currentRecordFilter === 'all' ? '' : `“${getLevelName(currentRecordFilter)}”`;
+        list.innerHTML = `<div class="empty-tip">暂无${filterText}闯关记录</div>`;
+        return;
+    }
+    
+    let html = "";
+    records.slice(0, 30).forEach((item, idx) => {
+        const passText = item.pass ? "✅ 通关" : "❌ 失败";
+        html += `
+        <div class="record-item">
+            <div class="record-mode">${item.levelName}模式</div>
+            <div class="record-detail">得分：${item.correct}/${item.total} (${item.score}分) | ${passText}</div>
+            <div class="record-detail" style="color:#999;">${item.date}</div>
+            <div class="record-score">🎯 ${passText}</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+}
+
+function clearQuizRecord() {
+    const user = getQuizUser();
+    if (!user) { alert("请先登录"); showLoginModal(); return; }
+    if (!confirm("确定清空所有历史记录吗？")) return;
+    localStorage.removeItem(`quiz_history_${user}`);
+    renderQuizRecord();
+    alert("历史记录已清空");
+}
+
+// ==================== 渲染排行榜 ====================
+function renderQuizRank() {
+    const list = document.getElementById("rankList");
+    const filterInfo = document.getElementById("rankFilterInfo");
+    
+    if (!isQuizLoggedIn()) {
+        list.innerHTML = `<div class="empty-tip"><i class="fas fa-lock"></i> 请先登录查看排行榜</div>`;
+        return;
+    }
+    
+    if (currentRankDifficulty === 'all') {
+        // 合并所有难度的排行榜
+        const allScores = [];
+        ['easy', 'medium', 'hard'].forEach(level => {
+            const ranks = JSON.parse(localStorage.getItem(`quiz_rank_${level}`) || '[]');
+            ranks.forEach(r => allScores.push({ ...r, level: level }));
+        });
+        allScores.sort((a, b) => b.score - a.score);
+        
+        filterInfo.innerHTML = `🏆 当前排行：全部难度 (按得分排序)`;
+        
+        if (allScores.length === 0) {
+            list.innerHTML = `<div class="empty-tip">暂无排行数据</div>`;
+            return;
+        }
+        
+        let html = "";
+        allScores.slice(0, 20).forEach((item, i) => {
+            const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}.`;
+            html += `
+            <div class="rank-item">
+                <div><strong>${medal}</strong> <strong style="color:#C41E3A;">${escapeHtml(item.user)}</strong>${i === 0 ? ' 👑' : ''}</div>
+                <div class="rank-detail">${getLevelName(item.level)}模式 | ${item.score}/7分 (${item.percent}分)</div>
+                <div class="rank-detail" style="font-size:10px; color:#999;">${item.date || ''}</div>
+            </div>`;
+        });
+        list.innerHTML = html;
+        return;
+    }
+    
+    // 单个难度
+    const rankKey = `quiz_rank_${currentRankDifficulty}`;
+    const ranks = JSON.parse(localStorage.getItem(rankKey) || '[]');
+    const levelText = getLevelName(currentRankDifficulty);
+    filterInfo.innerHTML = `🏆 当前排行：${levelText}模式 (按得分排序)`;
+    
+    if (ranks.length === 0) {
+        list.innerHTML = `<div class="empty-tip">暂无${levelText}模式排行数据</div>`;
+        return;
+    }
+    
+    let html = "";
+    ranks.slice(0, 20).forEach((item, i) => {
+        const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}.`;
+        html += `
+        <div class="rank-item">
+            <div><strong>${medal}</strong> <strong style="color:#C41E3A;">${escapeHtml(item.user)}</strong>${i === 0 ? ' 👑' : ''}</div>
+            <div class="rank-detail">得分：${item.score}/7分 (${item.percent}分)</div>
+            <div class="rank-detail" style="font-size:10px; color:#999;">${item.date || ''}</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+}
+
+function getLevelName(level) {
+    const map = { 'easy': '简单', 'medium': '中等', 'hard': '困难' };
+    return map[level] || level;
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// ==================== 面板切换 ====================
+function toggleRankPanel() {
+    const panel = document.getElementById('rankPanel');
+    const btn = document.getElementById('rankToggleBtn');
+    if (isRankOpen) {
+        panel.classList.remove('show');
+        btn.classList.add('collapsed');
+        btn.innerHTML = '<i class="fas fa-trophy"></i> 知识排行榜 <i class="fas fa-chevron-down"></i>';
+        isRankOpen = false;
+    } else {
+        panel.classList.add('show');
+        btn.classList.remove('collapsed');
+        btn.innerHTML = '<i class="fas fa-trophy"></i> 收起排行榜 <i class="fas fa-chevron-up"></i>';
+        isRankOpen = true;
+        renderQuizRank();
+    }
+}
+
+function toggleRecordPanel() {
+    const panel = document.getElementById('recordPanel');
+    const btn = document.getElementById('recordToggleBtn');
+    if (isRecordOpen) {
+        panel.classList.remove('show');
+        btn.classList.add('collapsed');
+        btn.innerHTML = '<i class="fas fa-history"></i> 我的闯关记录 <i class="fas fa-chevron-down"></i>';
+        isRecordOpen = false;
+    } else {
+        panel.classList.add('show');
+        btn.classList.remove('collapsed');
+        btn.innerHTML = '<i class="fas fa-history"></i> 收起闯关记录 <i class="fas fa-chevron-up"></i>';
+        isRecordOpen = true;
+        renderQuizRecord();
+    }
+}
+
+// ==================== 筛选器事件绑定 ====================
+function bindQuizFilterEvents() {
+    document.querySelectorAll('[data-rank-difficulty]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-rank-difficulty]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRankDifficulty = this.dataset.rankDifficulty;
+            renderQuizRank();
+        });
+    });
+    
+    document.querySelectorAll('[data-record-filter]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-record-filter]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRecordFilter = this.dataset.recordFilter;
+            renderQuizRecord();
+        });
+    });
+}
+
+// 导航栏高亮
+function setNavActive() {
+    document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
+    const navLinks = document.querySelectorAll('.nav-list a');
+    for(let link of navLinks) {
+        if(link.innerText.trim() === '趣味学堂') {
+            link.classList.add('active');
+            break;
+        }
+    }
+    const userIcon = document.querySelector('.user-icon-btn');
+    if(userIcon) userIcon.classList.remove('active');
+}
+
+// ==================== 搜索功能 ====================
+document.querySelector('.search-btn').addEventListener('click', function() {
+    const searchText = document.querySelector('.search-input').value.trim();
+    if (!searchText) { alert('请输入搜索内容'); return; }
+    alert(`正在搜索：${searchText}，找到相关结果`);
+});
+document.querySelector('.search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') document.querySelector('.search-btn').click();
+});
+
+// ==================== 按钮事件 ====================
+levelBtns.easy.addEventListener("click", () => startGame("easy"));
+levelBtns.medium.addEventListener("click", () => startGame("medium"));
+levelBtns.hard.addEventListener("click", () => startGame("hard"));
+
+// ==================== 初始化 ====================
+window.onload = function() {
+    setNavActive();
+    updateLoginTip();
+    bindQuizFilterEvents();
+    updateLevelBtn();
+    document.getElementById('rankPanel').classList.remove('show');
+    document.getElementById('recordPanel').classList.remove('show');
+    isRankOpen = false;
+    isRecordOpen = false;
+    renderQuizRank();
+    renderQuizRecord();
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,1270 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人中心 - 京韵堂</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+body {
+    background-color: #fdf6e3;
+}
+.content-section {
+    width: 100%;
+    padding: 40px 73px;
+    background-color: #f9f7f0;
+    min-height: calc(100vh - 53px - 42px);
+    box-sizing: border-box;
+}
+.content-title {
+    font-size: 28px;
+    color: #8B4513;
+    border-bottom: 2px solid #DBC078;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+.user-center-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.auth-card {
+    max-width: 450px;
+    margin: 30px auto;
+    padding: 35px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: 1px solid #e6e2cc;
+}
+.auth-card h2 {
+    color: #C41E3A;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+.auth-card input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #e6e2cc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+    background: #fffbf2;
+}
+.auth-card input:focus {
+    outline: none;
+    border-color: #DBC078;
+}
+.auth-card button {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.btn-login {
+    background: #C41E3A;
+    color: #fff;
+}
+.btn-login:hover {
+    background: #a01830;
+}
+.btn-register {
+    background: #fff;
+    color: #C41E3A;
+    border: 1px solid #C41E3A !important;
+}
+.btn-register:hover {
+    background: #fff0f0;
+}
+.btn-logout {
+    background: #6c757d;
+    color: #fff;
+    margin-top: 10px;
+}
+.btn-logout:hover {
+    background: #5a6268;
+}
+.user-info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    border: 1px solid #e6e2cc;
+}
+.user-avatar-section {
+    text-align: center;
+    position: relative;
+}
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C41E3A, #DBC078);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.user-avatar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.user-avatar i {
+    font-size: 48px;
+    color: #fff;
+}
+.avatar-edit-btn {
+    background: #DBC078;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.avatar-edit-btn:hover {
+    background: #c9a858;
+}
+.user-info-detail {
+    flex: 1;
+}
+.user-info-detail h3 {
+    color: #8B4513;
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.edit-name-btn {
+    background: none;
+    border: 1px solid #DBC078;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #8B4513;
+}
+.edit-name-btn:hover {
+    background: #DBC078;
+    color: #333;
+}
+.user-info-detail p {
+    color: #666;
+    margin: 8px 0;
+}
+.user-info-detail i {
+    width: 25px;
+    color: #DBC078;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    width: 350px;
+    max-width: 90%;
+    text-align: center;
+}
+.modal-box h3 {
+    color: #8B4513;
+    margin-bottom: 20px;
+}
+.modal-box input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #DBC078;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.modal-buttons button {
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.modal-confirm {
+    background: #C41E3A;
+    color: #fff;
+}
+.modal-cancel {
+    background: #ccc;
+    color: #333;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e6e2cc;
+    transition: transform 0.3s;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+.stat-card i {
+    font-size: 32px;
+    color: #C41E3A;
+    margin-bottom: 10px;
+}
+.stat-card .stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #8B4513;
+}
+.stat-card .stat-label {
+    color: #999;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.detail-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #e6e2cc;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #DBC078;
+    margin-bottom: 20px;
+}
+.section-header h3 {
+    color: #8B4513;
+    font-size: 20px;
+}
+.section-header i {
+    color: #DBC078;
+    margin-right: 8px;
+}
+.view-all-btn {
+    background: none;
+    border: none;
+    color: #C41E3A;
+    cursor: pointer;
+    font-size: 13px;
+}
+.view-all-btn:hover {
+    text-decoration: underline;
+}
+.list-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.list-item:last-child {
+    border-bottom: none;
+}
+.item-title {
+    font-weight: bold;
+    color: #333;
+}
+.item-date {
+    font-size: 12px;
+    color: #999;
+}
+.item-score {
+    color: #C41E3A;
+    font-weight: bold;
+}
+.item-badge {
+    background: #f0f0f0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.post-content-preview {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.delete-post-btn {
+    background: #f08585;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+    color: #fff;
+}
+.delete-post-btn:hover {
+    background: #e06767;
+}
+.favorite-play-btn {
+    background: #DBC078;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.favorite-play-btn:hover {
+    background: #c9a858;
+}
+.favorite-delete-btn {
+    background: #f08585;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 8px;
+}
+.favorite-delete-btn:hover {
+    background: #e06767;
+}
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #e0d5c0;
+}
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+}
+.work-item {
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s;
+}
+.work-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #DBC078;
+}
+.work-item img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.work-item p {
+    font-size: 11px;
+    margin-top: 5px;
+    color: #666;
+}
+.follow-user-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.follow-user-item:last-child {
+    border-bottom: none;
+}
+.follow-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ddd;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.follow-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.follow-info {
+    flex: 1;
+    cursor: pointer;
+}
+.follow-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+.follow-stats {
+    font-size: 11px;
+    color: #999;
+}
+.unfollow-btn {
+    background: #f08585;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 30px 20px;
+    }
+    .user-info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+    <div class="nav-container">
+        <img src="../images/logo.png" alt="LOGO" class="site-logo">
+        <img src="../images/京韵堂.png" alt="京韵堂" class="site-name">
+        <ul class="nav-list">
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="文化展示.html">文化展示</a></li>
+            <li><a href="资源中心.html">资源中心</a></li>
+            <li><a href="趣味学堂.html">趣味学堂</a></li>
+            <li><a href="社区交流.html">社区交流</a></li>
+        </ul>
+    </div>
+    <button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='个人中心.html'">
+        <em class="fas fa-user"></em>
+    </button>
+    <div class="search-wrapper">
+        <input type="text" class="search-input" placeholder="搜索全站内容...">
+        <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<p id="bread">您当前所在位置 > <a href="../index.html">首页</a> > <strong>个人中心</strong></p>
+
+<div class="content-section">
+    <div class="user-center-container">
+        <h2 class="content-title"><i class="fas fa-user-circle"></i> 个人中心</h2>
+
+        <div id="loginArea" class="auth-card">
+            <h2><i class="fas fa-sign-in-alt"></i> 登录 / 注册</h2>
+            <input type="text" id="loginUsername" placeholder="用户名">
+            <input type="password" id="loginPassword" placeholder="密码">
+            <button class="btn-login" id="doLoginBtn"><i class="fas fa-key"></i> 登录</button>
+            <button class="btn-register" id="doRegisterBtn"><i class="fas fa-user-plus"></i> 注册新账号</button>
+            <p style="font-size:12px; color:#999; text-align:center; margin-top:15px;">提示：可直接输入任意用户名和密码123456登录体验</p>
+        </div>
+
+        <div id="userArea" style="display:none;">
+            <div class="user-info-card">
+                <div class="user-avatar-section">
+                    <div class="user-avatar" id="avatarPreview" onclick="changeAvatar()">
+                        <i class="fas fa-user" id="avatarIcon"></i>
+                        <img id="avatarImg" style="display:none; width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <button class="avatar-edit-btn" onclick="changeAvatar()"><i class="fas fa-camera"></i> 换头像</button>
+                </div>
+                <div class="user-info-detail">
+                    <h3>
+                        <span id="displayUsername">用户名</span>
+                        <button class="edit-name-btn" onclick="editNickname()"><i class="fas fa-pen"></i> 修改昵称</button>
+                    </h3>
+                    <p><i class="fas fa-calendar-alt"></i> 注册时间：2026年</p>
+                    <p><i class="fas fa-star"></i> 会员等级：京剧爱好者</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 来自：京剧文化传承者</p>
+                </div>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出登录</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><i class="fas fa-question-circle"></i><div class="stat-number" id="quizCount">0</div><div class="stat-label">参与答题</div></div>
+                <div class="stat-card"><i class="fas fa-gamepad"></i><div class="stat-number" id="gameCount">0</div><div class="stat-label">游戏次数</div></div>
+                <div class="stat-card"><i class="fas fa-paint-brush"></i><div class="stat-number" id="faceCount">0</div><div class="stat-label">脸谱作品</div></div>
+                <div class="stat-card"><i class="fas fa-headphones"></i><div class="stat-number" id="favoriteCount">0</div><div class="stat-label">收藏曲目</div></div>
+                <div class="stat-card"><i class="fas fa-trophy"></i><div class="stat-number" id="bestScore">0</div><div class="stat-label">最高得分</div></div>
+                <div class="stat-card"><i class="fas fa-comment"></i><div class="stat-number" id="postCount">0</div><div class="stat-label">发帖数量</div></div>
+            </div>
+
+            <div style="display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+                <div class="detail-section" style="flex: 1; margin-bottom: 0;">
+                    <div class="section-header">
+                        <h3><i class="fas fa-heart"></i> 我的关注 (<span id="followCount">0</span>)</h3>
+                        <button class="view-all-btn" onclick="showAllFollows()">查看全部 &gt;</button>
+                    </div>
+                    <div id="followList"></div>
+                </div>
+                <div class="detail-section" style="flex: 1; margin-bottom: 0;">
+                    <div class="section-header">
+                        <h3><i class="fas fa-users"></i> 我的粉丝 (<span id="fansCount">0</span>)</h3>
+                        <button class="view-all-btn" onclick="showAllFans()">查看全部 &gt;</button>
+                    </div>
+                    <div id="fansList"></div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> 答题历史</h3>
+                    <button class="view-all-btn" onclick="showAllQuizHistory()">查看全部 &gt;</button>
+                </div>
+                <div id="quizHistoryList"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-dice-d6"></i> 游戏记录</h3>
+                    <button class="view-all-btn" onclick="showAllGameRecords()">查看全部 &gt;</button>
+                </div>
+                <div id="gameRecordList"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> 我的发帖记录</h3>
+                    <button class="view-all-btn" onclick="showAllPosts()">查看全部 &gt;</button>
+                </div>
+                <div id="postRecordList"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-palette"></i> 脸谱作品</h3>
+                    <button class="view-all-btn" onclick="showAllFaceWorks()">查看全部 &gt;</button>
+                </div>
+                <div id="faceWorksList" class="works-grid"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-heart"></i> 收藏曲目</h3>
+                    <button class="view-all-btn" onclick="showAllFavorites()">查看全部 &gt;</button>
+                </div>
+                <div id="favoritesList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 京韵堂 版权所有</p>
+</footer>
+
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+// ==================== 基础函数 ====================
+function getCurrentUser() {
+    return localStorage.getItem("currentUser") || localStorage.getItem("username");
+}
+
+function isLoggedIn() {
+    return localStorage.getItem("jyLogin") === "true" || getCurrentUser() !== null;
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+function getUserAvatarHtml(user) {
+    const avatarData = localStorage.getItem(`avatar_${user}`);
+    if (avatarData && avatarData !== 'null' && avatarData !== 'undefined' && avatarData !== '') {
+        return `<img src="${avatarData}" style="width:100%; height:100%; object-fit:cover;">`;
+    }
+    return `<i class="fas fa-user" style="font-size:20px; color:#fff;"></i>`;
+}
+
+function getUserNickname(user) {
+    return localStorage.getItem(`nickname_${user}`) || user;
+}
+
+// ==================== 头像和昵称 ====================
+function loadAvatar() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const avatarData = localStorage.getItem(`avatar_${user}`);
+    const avatarIcon = document.getElementById('avatarIcon');
+    const avatarImg = document.getElementById('avatarImg');
+    if (avatarData && avatarData !== 'null' && avatarData !== 'undefined' && avatarData !== '') {
+        avatarIcon.style.display = 'none';
+        avatarImg.style.display = 'block';
+        avatarImg.src = avatarData;
+    } else {
+        avatarIcon.style.display = 'flex';
+        avatarImg.style.display = 'none';
+    }
+}
+
+function changeAvatar() {
+    const user = getCurrentUser();
+    if (!user) { alert("请先登录"); return; }
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                localStorage.setItem(`avatar_${user}`, event.target.result);
+                loadAvatar();
+                alert("头像更换成功！");
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    input.click();
+}
+
+function editNickname() {
+    const user = getCurrentUser();
+    if (!user) { alert("请先登录"); return; }
+    const currentNickname = localStorage.getItem(`nickname_${user}`) || user;
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-box">
+            <h3><i class="fas fa-pen"></i> 修改昵称</h3>
+            <input type="text" id="newNickname" placeholder="请输入新昵称" value="${escapeHtml(currentNickname)}">
+            <div class="modal-buttons">
+                <button class="modal-confirm" onclick="saveNickname()">保存</button>
+                <button class="modal-cancel" onclick="closeModal(this)">取消</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    window.saveNickname = function() {
+        const newNickname = document.getElementById('newNickname').value.trim();
+        if (!newNickname) { alert("昵称不能为空"); return; }
+        localStorage.setItem(`nickname_${user}`, newNickname);
+        document.getElementById('displayUsername').innerText = newNickname;
+        localStorage.setItem("username", newNickname);
+        localStorage.setItem("currentUser", newNickname);
+        modal.remove();
+        alert("昵称修改成功！");
+    };
+    
+    window.closeModal = function(btn) {
+        btn.closest('.modal-overlay').remove();
+    };
+}
+
+function loadNickname() {
+    const user = getCurrentUser();
+    if (!user) return;
+    document.getElementById('displayUsername').innerText = localStorage.getItem(`nickname_${user}`) || user;
+}
+
+// ==================== 登录/注册 ====================
+function doLogin() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { alert("请输入用户名和密码"); return; }
+    if (localStorage.getItem(username) === password || password === "123456") {
+        localStorage.setItem("jyLogin", "true");
+        localStorage.setItem("currentUser", username);
+        localStorage.setItem("username", username);
+        if (!localStorage.getItem(username)) localStorage.setItem(username, password);
+        alert("登录成功！");
+        location.reload();
+    } else {
+        alert("用户名或密码错误！\n提示：可直接输入任意用户名和密码123456登录");
+    }
+}
+
+function doRegister() {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!username || !password) { alert("请输入用户名和密码"); return; }
+    if (localStorage.getItem(username)) { alert("用户名已存在，请直接登录"); return; }
+    localStorage.setItem(username, password);
+    localStorage.setItem("jyLogin", "true");
+    localStorage.setItem("currentUser", username);
+    localStorage.setItem("username", username);
+    alert("注册成功！已自动登录");
+    location.reload();
+}
+
+function logout() {
+    localStorage.removeItem("jyLogin");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("username");
+    alert("已退出登录");
+    location.reload();
+}
+
+// ==================== 统计数据（从社区获取最新发帖数） ====================
+function loadUserStats() {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    const quizHistory = JSON.parse(localStorage.getItem(`quiz_history_${user}`) || '[]');
+    const gameRecords = JSON.parse(localStorage.getItem(`game_record_${user}`) || '[]');
+    const faceWorks = JSON.parse(localStorage.getItem(`face_works_${user}`) || '[]');
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${user}`) || '[]');
+    
+    const communityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const userPosts = communityPosts.filter(p => p.author === user);
+    
+    let maxScore = 0;
+    quizHistory.forEach(h => { if (h.score > maxScore) maxScore = h.score; });
+    
+    document.getElementById("quizCount").innerText = quizHistory.length;
+    document.getElementById("gameCount").innerText = gameRecords.length;
+    document.getElementById("faceCount").innerText = faceWorks.length;
+    document.getElementById("favoriteCount").innerText = favorites.length;
+    document.getElementById("bestScore").innerText = maxScore;
+    document.getElementById("postCount").innerText = userPosts.length;
+}
+
+// ==================== 答题历史 ====================
+function loadQuizHistory(limit = 5) {
+    const user = getCurrentUser();
+    if (!user) return;
+    const history = JSON.parse(localStorage.getItem(`quiz_history_${user}`) || '[]');
+    const container = document.getElementById("quizHistoryList");
+    if (history.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>暂无答题记录，快去知识问答挑战吧！</p></div>';
+        return;
+    }
+    const displayHistory = history.slice().reverse().slice(0, limit);
+    container.innerHTML = displayHistory.map(h => `
+        <div class="list-item">
+            <div><span class="item-title">${h.levelName || h.level}模式</span><span class="item-date">${h.date}</span></div>
+            <div><span class="item-score">${h.correct}/${h.total} 正确</span><span class="item-badge">${h.score}分</span></div>
+        </div>
+    `).join('');
+}
+
+function showAllQuizHistory() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const history = JSON.parse(localStorage.getItem(`quiz_history_${user}`) || '[]');
+    if (history.length === 0) { alert("暂无答题记录"); return; }
+    alert("答题记录：\n" + history.map(h => `${h.date} - ${h.levelName || h.level}模式 - ${h.score}分`).join("\n"));
+}
+
+// ==================== 游戏记录 ====================
+function loadGameRecords(limit = 5) {
+    const user = getCurrentUser();
+    if (!user) return;
+    const records = JSON.parse(localStorage.getItem(`game_record_${user}`) || '[]');
+    const container = document.getElementById("gameRecordList");
+    if (records.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-gamepad"></i><p>暂无游戏记录，去记忆卡牌游戏试试吧！</p></div>';
+        return;
+    }
+    const displayRecords = records.slice().reverse().slice(0, limit);
+    container.innerHTML = displayRecords.map(r => `
+        <div class="list-item">
+            <div><span class="item-title">${r.mode === 'all' ? '混合模式' : (r.type || '未知') + '模式'}</span><span class="item-date">${r.date}</span></div>
+            <div><span class="item-score">${r.steps}步</span><span class="item-badge">${r.time}秒</span></div>
+        </div>
+    `).join('');
+}
+
+function showAllGameRecords() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const records = JSON.parse(localStorage.getItem(`game_record_${user}`) || '[]');
+    if (records.length === 0) { alert("暂无游戏记录"); return; }
+    alert("游戏记录：\n" + records.map(r => `${r.date} - ${r.mode === 'all' ? '混合' : (r.type || '未知')}模式 - ${r.steps}步/${r.time}秒`).join("\n"));
+}
+
+// ==================== 发帖记录（从社区同步最新数据） ====================
+function loadPostRecords(limit = 5) {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    const communityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const userPostsFromCommunity = communityPosts.filter(p => p.author === user);
+    
+    const updatedPosts = userPostsFromCommunity.map(p => ({
+        id: p.id,
+        title: p.content.substring(0, 30) + (p.content.length > 30 ? '...' : ''),
+        content: p.content,
+        date: p.date,
+        likes: (p.likes || []).length,
+        comments: (p.comments || []).length
+    }));
+    
+    const userPostsKey = `user_posts_${user}`;
+    localStorage.setItem(userPostsKey, JSON.stringify(updatedPosts.slice(0, 50)));
+    
+    const posts = updatedPosts;
+    const container = document.getElementById("postRecordList");
+    
+    if (posts.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-comment-dots"></i><p>暂无发帖记录，去社区交流分享你的京剧心得吧！</p></div>';
+        return;
+    }
+    
+    const displayPosts = posts.slice().reverse().slice(0, limit);
+    container.innerHTML = displayPosts.map(post => `
+        <div class="list-item">
+            <div style="flex:1;">
+                <div class="item-title">${escapeHtml(post.title || '帖子')}</div>
+                <div class="post-content-preview">${escapeHtml(post.content.substring(0, 80))}${post.content.length > 80 ? '...' : ''}</div>
+                <div class="item-date">${post.date}</div>
+            </div>
+            <div>
+                <span class="item-badge">👍 ${post.likes || 0}</span>
+                <span class="item-badge">💬 ${post.comments || 0}</span>
+                <button class="delete-post-btn" onclick="deletePost('${post.id}')"><i class="fas fa-trash"></i> 删除</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function deletePost(postId) {
+    const user = getCurrentUser();
+    if (!user) return;
+    if (!confirm("确定要删除这条帖子吗？")) return;
+    
+    const communityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const newCommunityPosts = communityPosts.filter(p => p.id != postId);
+    localStorage.setItem('community_posts', JSON.stringify(newCommunityPosts));
+    
+    const userPostsKey = `user_posts_${user}`;
+    let userPosts = JSON.parse(localStorage.getItem(userPostsKey) || '[]');
+    userPosts = userPosts.filter(p => p.id != postId);
+    localStorage.setItem(userPostsKey, JSON.stringify(userPosts));
+    
+    loadPostRecords();
+    const updatedCommunityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const userPostCount = updatedCommunityPosts.filter(p => p.author === user).length;
+    document.getElementById("postCount").innerText = userPostCount;
+    alert("帖子已删除");
+}
+
+function showAllPosts() {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    const communityPosts = JSON.parse(localStorage.getItem('community_posts') || '[]');
+    const userPosts = communityPosts.filter(p => p.author === user);
+    
+    if (userPosts.length === 0) { alert("暂无发帖记录"); return; }
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; width:500px; max-width:90%; max-height:80%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513; margin-bottom:15px;"><i class="fas fa-comments"></i> 我的全部发帖 (${userPosts.length})</h3>
+            ${userPosts.slice().reverse().map(p => `
+                <div style="padding:12px; border-bottom:1px solid #eee;">
+                    <div style="font-weight:bold;">${escapeHtml(p.content.substring(0, 50))}${p.content.length > 50 ? '...' : ''}</div>
+                    <div style="font-size:12px; color:#666; margin:5px 0;">${escapeHtml(p.content.substring(0, 100))}${p.content.length > 100 ? '...' : ''}</div>
+                    <div style="font-size:11px; color:#999;">${p.date}</div>
+                    <div style="margin-top:5px;">
+                        <span style="background:#f0f0f0; padding:2px 8px; border-radius:12px; font-size:11px;">👍 ${(p.likes || []).length}</span>
+                        <span style="background:#f0f0f0; padding:2px 8px; border-radius:12px; font-size:11px; margin-left:8px;">💬 ${(p.comments || []).length}</span>
+                    </div>
+                </div>
+            `).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer; width:100%;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// ==================== 脸谱作品 ====================
+function loadFaceWorks(limit = 6) {
+    const user = getCurrentUser();
+    if (!user) return;
+    const works = JSON.parse(localStorage.getItem(`face_works_${user}`) || '[]');
+    const container = document.getElementById("faceWorksList");
+    if (works.length === 0) {
+        container.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-paint-brush"></i><p>暂无脸谱作品，去脸谱DIY创作吧！</p></div>';
+        return;
+    }
+    const displayWorks = works.slice().reverse().slice(0, limit);
+    container.innerHTML = displayWorks.map(w => `
+        <div class="work-item" onclick="viewWorkImage('${w.image}')">
+            <img src="${w.image}" alt="${w.title || '脸谱作品'}">
+            <p>${escapeHtml(w.title || '脸谱作品')}</p>
+            <small style="font-size:10px;">${w.date}</small>
+        </div>
+    `).join('');
+}
+
+function showAllFaceWorks() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const works = JSON.parse(localStorage.getItem(`face_works_${user}`) || '[]');
+    if (works.length === 0) { alert("暂无脸谱作品"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; max-width:90%; max-height:90%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;">我的全部作品</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px,1fr)); gap:15px; margin-top:15px;">
+                ${works.slice().reverse().map(w => `
+                    <div style="text-align:center; cursor:pointer;" onclick="viewWorkImage('${w.image}')">
+                        <img src="${w.image}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
+                        <p style="font-size:12px;">${escapeHtml(w.title || '脸谱作品')}</p>
+                    </div>
+                `).join('')}
+            </div>
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:20px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function viewWorkImage(src) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `<img src="${src}" style="max-width:90%; max-height:90%; border-radius:8px;">`;
+    modal.onclick = () => modal.remove();
+    document.body.appendChild(modal);
+}
+
+// ==================== 收藏曲目 ====================
+function loadFavorites(limit = 5) {
+    const user = getCurrentUser();
+    if (!user) return;
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${user}`) || '[]');
+    const container = document.getElementById("favoritesList");
+    if (favorites.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-heart"></i><p>暂无收藏曲目，去经典唱段音频收藏喜欢的曲目吧！</p></div>';
+        return;
+    }
+    const displayFavs = favorites.slice().reverse().slice(0, limit);
+    container.innerHTML = displayFavs.map(fav => `
+        <div class="list-item">
+            <div><span class="item-title">🎵 ${escapeHtml(fav.name)}</span><span class="item-date">${fav.artist || '未知艺术家'}</span></div>
+            <div>
+                <button class="favorite-play-btn" onclick="playFavorite('${escapeHtml(fav.audioSrc || '')}', '${escapeHtml(fav.name)}')"><i class="fas fa-play"></i> 播放</button>
+                <button class="favorite-delete-btn" onclick="deleteFavorite('${escapeHtml(fav.name)}')"><i class="fas fa-trash"></i> 删除</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function playFavorite(audioSrc, songName) {
+    if (!audioSrc) { alert('无法播放：音频文件不存在'); return; }
+    let audioPlayer = document.getElementById('floatingAudioPlayer');
+    if (!audioPlayer) {
+        audioPlayer = document.createElement('audio');
+        audioPlayer.id = 'floatingAudioPlayer';
+        audioPlayer.style.cssText = 'position:fixed; bottom:80px; right:20px; z-index:9999; width:300px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2);';
+        document.body.appendChild(audioPlayer);
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '✕';
+        closeBtn.style.cssText = 'position:fixed; bottom:130px; right:25px; z-index:10000; background:#C41E3A; color:#fff; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer;';
+        closeBtn.onclick = function() { audioPlayer.pause(); audioPlayer.style.display = 'none'; closeBtn.style.display = 'none'; };
+        document.body.appendChild(closeBtn);
+        window.audioCloseBtn = closeBtn;
+    }
+    audioPlayer.src = audioSrc;
+    audioPlayer.style.display = 'block';
+    if (window.audioCloseBtn) window.audioCloseBtn.style.display = 'block';
+    audioPlayer.play();
+    alert(`正在播放：${songName}`);
+}
+
+function deleteFavorite(songName) {
+    const user = getCurrentUser();
+    if (!user) return;
+    if (!confirm(`确定要从收藏中删除《${songName}》吗？`)) return;
+    const favoritesKey = `favorites_${user}`;
+    let favorites = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
+    favorites = favorites.filter(fav => fav.name !== songName);
+    localStorage.setItem(favoritesKey, JSON.stringify(favorites));
+    loadFavorites();
+    document.getElementById("favoriteCount").innerText = favorites.length;
+}
+
+function showAllFavorites() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${user}`) || '[]');
+    if (favorites.length === 0) { alert("暂无收藏曲目"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; max-width:90%; max-height:90%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;">我的全部收藏</h3>
+            ${favorites.map(fav => `<div style="padding:10px; border-bottom:1px solid #eee;">🎵 ${escapeHtml(fav.name)} - ${fav.artist}</div>`).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// ==================== 关注和粉丝 ====================
+function getFansList(user) {
+    let fans = [];
+    for(let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if(key && key.startsWith('follows_')) {
+            const otherUser = key.replace('follows_', '');
+            const follows = JSON.parse(localStorage.getItem(key) || '[]');
+            if(follows.includes(user)) fans.push(otherUser);
+        }
+    }
+    return fans;
+}
+
+function loadFollowAndFans() {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    const follows = JSON.parse(localStorage.getItem(`follows_${user}`) || '[]');
+    document.getElementById('followCount').innerText = follows.length;
+    const followContainer = document.getElementById('followList');
+    if (follows.length === 0) {
+        followContainer.innerHTML = '<div class="empty-state" style="padding:20px;"><i class="fas fa-user-plus"></i><p>暂无关注，去社区交流关注戏友吧！</p></div>';
+    } else {
+        const displayFollows = follows.slice(0, 5);
+        followContainer.innerHTML = displayFollows.map(f => `
+            <div class="follow-user-item">
+                <div class="follow-avatar" onclick="viewUserProfile('${f}')">${getUserAvatarHtml(f)}</div>
+                <div class="follow-info" onclick="viewUserProfile('${f}')">
+                    <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                    <div class="follow-stats">@${escapeHtml(f)}</div>
+                </div>
+                <button class="unfollow-btn" onclick="unfollowUser('${f}')">取消</button>
+            </div>
+        `).join('');
+        if (follows.length > 5) {
+            followContainer.innerHTML += `<div style="text-align:center; padding-top:10px;"><a href="#" onclick="showAllFollows()">查看全部 ${follows.length} 人</a></div>`;
+        }
+    }
+    
+    const fans = getFansList(user);
+    document.getElementById('fansCount').innerText = fans.length;
+    const fansContainer = document.getElementById('fansList');
+    if (fans.length === 0) {
+        fansContainer.innerHTML = '<div class="empty-state" style="padding:20px;"><i class="fas fa-user-friends"></i><p>暂无粉丝，发布帖子吸引关注吧！</p></div>';
+    } else {
+        const displayFans = fans.slice(0, 5);
+        fansContainer.innerHTML = displayFans.map(f => `
+            <div class="follow-user-item">
+                <div class="follow-avatar" onclick="viewUserProfile('${f}')">${getUserAvatarHtml(f)}</div>
+                <div class="follow-info" onclick="viewUserProfile('${f}')">
+                    <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                    <div class="follow-stats">@${escapeHtml(f)}</div>
+                </div>
+            </div>
+        `).join('');
+        if (fans.length > 5) {
+            fansContainer.innerHTML += `<div style="text-align:center; padding-top:10px;"><a href="#" onclick="showAllFans()">查看全部 ${fans.length} 人</a></div>`;
+        }
+    }
+}
+
+function unfollowUser(targetUser) {
+    const user = getCurrentUser();
+    if (!user) return;
+    if (!confirm(`确定要取消关注 ${getUserNickname(targetUser)} 吗？`)) return;
+    const followsKey = `follows_${user}`;
+    let follows = JSON.parse(localStorage.getItem(followsKey) || '[]');
+    follows = follows.filter(u => u !== targetUser);
+    localStorage.setItem(followsKey, JSON.stringify(follows));
+    loadFollowAndFans();
+    alert(`已取消关注 ${getUserNickname(targetUser)}`);
+}
+
+function showAllFollows() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const follows = JSON.parse(localStorage.getItem(`follows_${user}`) || '[]');
+    if (follows.length === 0) { alert("暂无关注"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; width:400px; max-width:90%; max-height:80%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;"><i class="fas fa-heart"></i> 我的关注 (${follows.length})</h3>
+            ${follows.map(f => `
+                <div class="follow-user-item">
+                    <div class="follow-avatar">${getUserAvatarHtml(f)}</div>
+                    <div class="follow-info" onclick="viewUserProfile('${f}'); modal.remove();">
+                        <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                        <div class="follow-stats">@${escapeHtml(f)}</div>
+                    </div>
+                    <button class="unfollow-btn" onclick="unfollowUser('${f}'); modal.remove();">取消</button>
+                </div>
+            `).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer; width:100%;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function showAllFans() {
+    const user = getCurrentUser();
+    if (!user) return;
+    const fans = getFansList(user);
+    if (fans.length === 0) { alert("暂无粉丝"); return; }
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div style="background:#fff; border-radius:16px; width:400px; max-width:90%; max-height:80%; overflow:auto; padding:20px;">
+            <h3 style="color:#8B4513;"><i class="fas fa-users"></i> 我的粉丝 (${fans.length})</h3>
+            ${fans.map(f => `
+                <div class="follow-user-item">
+                    <div class="follow-avatar">${getUserAvatarHtml(f)}</div>
+                    <div class="follow-info" onclick="viewUserProfile('${f}'); modal.remove();">
+                        <div class="follow-name">${escapeHtml(getUserNickname(f))}</div>
+                        <div class="follow-stats">@${escapeHtml(f)}</div>
+                    </div>
+                </div>
+            `).join('')}
+            <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:15px; padding:8px 20px; background:#C41E3A; color:#fff; border:none; border-radius:6px; cursor:pointer; width:100%;">关闭</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function viewUserProfile(targetUser) {
+    const currentUser = getCurrentUser();
+    if (targetUser === currentUser) { window.location.href = '个人中心.html'; return; }
+    const nickname = getUserNickname(targetUser);
+    const follows = JSON.parse(localStorage.getItem(`follows_${currentUser}`) || '[]');
+    const isFollowing = follows.includes(targetUser);
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-box">
+            <div style="width:80px; height:80px; border-radius:50%; margin:0 auto 15px; background:#ddd; display:flex; align-items:center; justify-content:center; overflow:hidden;">${getUserAvatarHtml(targetUser)}</div>
+            <h3 style="color:#8B4513;">${escapeHtml(nickname)}</h3>
+            <p style="color:#666;">@${escapeHtml(targetUser)}</p>
+            <div class="modal-buttons" style="margin-top:20px;">
+                <button id="profileFollowBtn" style="background:${isFollowing ? '#999' : '#C41E3A'}; color:#fff;">${isFollowing ? '已关注' : '关注'}</button>
+                <button onclick="this.closest('.modal-overlay').remove()" style="background:#ccc;">关闭</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('profileFollowBtn').onclick = function() {
+        const followsKey = `follows_${currentUser}`;
+        let newFollows = JSON.parse(localStorage.getItem(followsKey) || '[]');
+        if (isFollowing) {
+            newFollows = newFollows.filter(u => u !== targetUser);
+            alert(`已取消关注 ${nickname}`);
+        } else {
+            newFollows.push(targetUser);
+            alert(`已关注 ${nickname}`);
+        }
+        localStorage.setItem(followsKey, JSON.stringify(newFollows));
+        modal.remove();
+        loadFollowAndFans();
+    };
+}
+
+// ==================== 导航栏高亮 ====================
+function setNavActive() {
+    document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
+    const userIcon = document.querySelector('.user-icon-btn');
+    if (userIcon) userIcon.classList.add('active');
+}
+
+// ==================== 搜索功能 ====================
+document.querySelector('.search-btn')?.addEventListener('click', function() {
+    const searchText = document.querySelector('.search-input')?.value.trim();
+    if (!searchText) { alert('请输入搜索内容'); return; }
+    alert(`正在搜索：${searchText}，找到相关结果`);
+});
+document.querySelector('.search-input')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') document.querySelector('.search-btn')?.click();
+});
+
+// ==================== 绑定事件 ====================
+document.getElementById("doLoginBtn")?.addEventListener("click", doLogin);
+document.getElementById("doRegisterBtn")?.addEventListener("click", doRegister);
+document.getElementById("logoutBtn")?.addEventListener("click", logout);
+
+// ==================== 初始化 ====================
+function initPage() {
+    if (isLoggedIn()) {
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("userArea").style.display = "block";
+        loadAvatar();
+        loadNickname();
+        loadUserStats();
+        loadQuizHistory();
+        loadGameRecords();
+        loadPostRecords();
+        loadFaceWorks();
+        loadFavorites();
+        loadFollowAndFans();
+    } else {
+        document.getElementById("loginArea").style.display = "block";
+        document.getElementById("userArea").style.display = "none";
+    }
+    setNavActive();
+}
+
+initPage();
+</script>
+</body>
+</html>
