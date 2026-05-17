@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>京韵堂-首页</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "微软雅黑", SimHei, sans-serif;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+	height: 63px !important;
+    min-height: 63px !important;
+	background: url('images/导航条.png') center center;
+	background-size: auto 100%;
+    border-bottom: 3px solid #DBC078;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 73px;
+}
+
+.site-logo {
+	height: 43px;
+    margin-right: 13px;
+}
+.site-name {
+	height: 43px;
+    margin-right: 312px;
+}
+.nav-container {
+	display: flex;
+    align-items: center;
+}
+
+.nav-list {
+	display: flex;
+	list-style: none;
+}
+
+.nav-list li {
+	margin-right: 63px;
+}
+.nav-list li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 17px;
+	line-height: 31px;
+    padding-bottom: 3px;
+}
+.nav-list li a.active {
+    color: #DBC078;
+    border-bottom: 3px solid #DBC078;
+}
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    width: 231px;
+    height: 31px;
+    padding: 0 13px;
+    border: none;
+    outline: none;
+    border-radius: 3px 0 0 3px;
+    font-size: 13px;
+}
+.search-btn {
+    width: 37px;
+    height: 31px;
+    background-color: #DBC078;
+    border: none;
+    outline: none;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-btn svg {
+    width: 21px;
+    height: 21px;
+}
+
+#bread{
+    position: fixed;
+    top: 63px;
+    left: 0;
+    width: 100%;
+    z-index: 998;
+	background-color: #FFEFDD;
+	border-bottom: 1px solid #DBC078;
+	padding: 5px 15px;
+	text-align: left;
+	color: black;
+}
+#bread strong {
+    color: #DBC078;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+	border-top: 1px #DBC078 solid;
+	padding: 15px;
+	background-color: #FFEFDD;
+}
+
+body {
+    padding-top: 88px;
+    background-color: #FFEFDD;
+}
+
+.banner {
+	width: 100%;
+    height: calc(100vh - 63px);
+    min-height: 500px;
+    overflow: hidden;
+	position: relative;
+}
+.banner > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.user-icon-btn {
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 23px;
+	cursor: pointer;
+	margin-right: 31px;
+}
+.user-icon-btn.active {
+    color: #DBC078 !important;
+    border-bottom: 3px solid #DBC078;
+}
+
+.carousel-desc {
+    position: absolute;
+    top: 130px;
+    right: 103px;
+    width: 580px;
+    z-index: 11;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+}
+.carousel-desc h1 {
+    font-size: 32px;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+    color: #C41E3A;
+    font-weight: bold;
+    margin-top: 0;
+}
+.carousel-desc p {
+    font-size: 18px;
+    line-height: 2;
+    letter-spacing: 3px;
+	color: #8B4513;
+}
+
+.carousel-container {
+  position: absolute;
+  top: 273px;
+  right: 103px;
+  width: 580px;
+  height: 400px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+  overflow: visible !important;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item {
+  position: absolute;
+  width: 380px;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+  transform: scale(0.8);
+  cursor: pointer;
+}
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-item:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  z-index: 100 !important;
+}
+.carousel-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+.carousel-controls {
+    position: absolute;
+    bottom: -40px;  /* 改为负数，让按钮移动到轮播图下方 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 9999;
+}
+.carousel-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.6);
+    color: #DBC078;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+.carousel-btn:hover {
+    background: #DBC078;
+    color: #fff;
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+    <header class="header">
+      <div class="nav-container">
+			<img src="images/logo.png" alt="LOGO" class="site-logo">
+            <img src="images/京韵堂.png" alt="京韵堂" class="site-name">
+            <ul class="nav-list">
+              <li><a href="#" class="active">首页</a></li>
+              <li><a href="htmls/文化展示.html">文化展示</a></li>
+              <li><a href="htmls/资源中心.html">资源中心</a></li>
+              <li><a href="htmls/趣味学堂.html">趣味学堂</a></li>
+			  <li><a href="htmls/社区交流.html">社区交流</a></li>
+            </ul>
+        </div>
+		<button class="user-icon-btn" id="userIconBtn" onclick="window.location.href='htmls/个人中心.html'">
+        <em class="fas fa-user"></em></button>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="搜索全站内容...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+	
+	<p id="bread">您当前所在位置 > <strong>首页</strong></p>
+
+    <section class="banner">
+    <img src="images/首页背景.png" alt="京韵堂京剧文化">
+    <div class="carousel-desc">
+        <h1>京韵流芳 · 国粹传承</h1>
+        <p>生旦净丑演绎人间百态，唱念做舞传承百年风华<br>
+        步入京韵堂，探寻京剧文化之美，领略传统艺术神韵</p>
+    </div>
+    <div class="carousel-container" id="carouselBox">
+        <div class="carousel-wrapper">
+            <div class="carousel-item">
+                <a href="htmls/知识问答.html">
+                    <img src="images/京剧知识问答.png" alt="京剧剧照1">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="htmls/脸谱DIY.html">
+                    <img src="images/京剧脸谱DIY.png" alt="京剧剧照2">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="htmls/京剧记忆卡牌游戏.html">
+                    <img src="images/京剧小游戏.png" alt="京剧剧照3">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="htmls/经典唱段音频.html">
+                    <img src="images/京剧音频.png" alt="京剧剧照4">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="htmls/京剧完整剧目.html">
+                    <img src="images/京剧剧目.png" alt="京剧剧照5">
+                </a>
+            </div>
+			 <div class="carousel-item">
+                <a href="htmls/京剧曲谱大全.html">
+                    <img src="images/京剧曲谱.png" alt="京剧剧照6">
+                </a>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+	<footer>
+        <p>&copy; 2026 京韵堂 版权所有</p>
+    </footer>
+	
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+</body>
+</html>
