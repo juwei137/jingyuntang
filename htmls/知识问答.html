@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>知识问答 - 京韵堂</title>
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="../css/css.css" rel="stylesheet" type="text/css">
@@ -562,7 +563,7 @@ nextBtn.addEventListener("click", () => {
 function endGame() {
     gameBox.style.display = "none";
     finalResult.style.display = "block";
-    const pass = correctCount >= 4;
+    const pass = correctCount >= 5;
     const passText = pass ? "🎉 闯关成功！" : "😢 闯关失败，请重试";
     finalResult.innerHTML = `
         <div style="font-size:28px; margin-bottom:15px;">${passText}</div>
