@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 73px;
+    padding: 0 5vw;
 }
 
 .site-logo {
@@ -44,7 +44,7 @@
 }
 
 .nav-list li {
-	margin-right: 63px;
+	margin-right: 3rem;
 }
 .nav-list li a {
     color: #FFFFFF;
@@ -360,7 +360,7 @@ body {
   margin-top: 20px;
 }
 .carousel-desc {
-    position: absolute;
+    position: relative;
     top: 130px;
     right: 103px;
     width: 580px;
@@ -383,7 +383,7 @@ body {
     letter-spacing: 3px;
 }
 .carousel-container {
-  position: absolute;
+  position: relative;
   top: 273px;
   right: 103px;
   width: 580px;
@@ -989,16 +989,329 @@ body {
 .volume-slider, .fontsize-slider {
     width: 90px;
 }
+/* ===================== 响应式布局（三断点） ===================== */
+/* ---------- 2. 平板端（768px - 1199px） ---------- */
+@media (min-width: 768px) and (max-width: 1199px) {
+    /* 导航栏间距压缩 */
+    .header {
+        padding: 0 30px;
+    }
+    .nav-list li {
+        margin-right: 30px;
+    }
+    .site-name {
+        margin-right: auto;
+    }
+    /* 内容区内边距缩小 */
+    .content-section {
+        padding: 13px 30px;
+    }
+    /* 首页轮播图右移缩小 */
+    .carousel-desc {
+        right: 30px;
+        width: 400px;
+        top: 80px;
+    }
+    .carousel-desc h1 {
+        font-size: 28px;
+    }
+    .carousel-desc p {
+        font-size: 16px;
+    }
+    .carousel-container {
+        right: 30px;
+        width: 400px;
+        top: 200px;
+    }
+    .carousel-item {
+        width: 280px;
+        height: 200px;
+    }
+    /* 资源中心音频卡片：2列 */
+    .player-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    /* 卡片容器允许2列 */
+    .card-container {
+        gap: 20px;
+    }
+    .card {
+        min-width: 260px;
+    }
+    /* 游戏区卡片适当缩小 */
+    .game-mode-item, .game-type-item, .game-level-item {
+        padding: 30px 25px;
+        min-width: 180px;
+    }
+}
 
-@media (max-width:900px) {
+/* ---------- 3. 手机端（≤767px） ---------- */
+@media (max-width: 767px) {
+    .header {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        height: auto !important;
+        min-height: 55px !important;
+    }
+    .nav-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .site-logo {
+        height: 35px;
+    }
+    .site-name {
+        height: 35px;
+        margin-right: auto;
+    }
+    .nav-list {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: #C41E3A;
+        position: absolute;
+        top: 63px;
+        left: 0;
+        padding: 15px 0;
+        margin: 0;
+        z-index: 1000;
+    }
+    .nav-list.active {
+        display: flex;
+    }
+    .nav-list li {
+        margin: 0;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .nav-list li a {
+        font-size: 16px;
+    }
+    /* 汉堡菜单按钮（需要JS创建或HTML中已存在） */
+    .menu-toggle {
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+    /* 搜索框换行 */
+    .search-wrapper {
+        width: 100%;
+        margin-top: 8px;
+        order: 3;
+    }
+    .search-input {
+        width: calc(100% - 45px);
+    }
+    .user-icon-btn {
+        margin-right: 10px;
+    }
+    /* 面包屑位置调整 */
+    #bread {
+        top: 95px;
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+    body {
+        padding-top: 110px;
+    }
+    /* 内容区内边距减小 */
+    .content-section {
+        padding: 13px 15px;
+    }
+    .content-title {
+        font-size: 22px;
+    }
+    /* 卡片：单列 */
+    .card-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .card {
+        min-width: auto;
+        width: 100%;
+    }
+    .card-img, .card-img2 {
+        height: 180px;
+    }
+    /* 首页banner与轮播图重新布局（上下堆叠） */
+    .banner {
+        height: auto;
+        min-height: 400px;
+    }
+    .carousel-desc {
+        position: static;
+        width: 100%;
+        padding: 15px;
+        background: rgba(0,0,0,0.5);
+        margin-top: 10px;
+        text-align: center;
+    }
+    .carousel-desc h1 {
+        font-size: 24px;
+        letter-spacing: 4px;
+    }
+    .carousel-desc p {
+        font-size: 14px;
+    }
+    .carousel-container {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+        perspective: none;
+    }
+    .carousel-wrapper {
+        height: 220px;
+    }
+    .carousel-item {
+        width: 240px;
+        height: 180px;
+    }
+    .carousel-controls {
+        position: static;
+        margin-top: 15px;
+        justify-content: center;
+    }
+    /* 趣味学堂游戏区 */
+    .game-mode-item, .game-type-item, .game-level-item {
+        padding: 20px 15px;
+        min-width: 140px;
+    }
+    .game-mode-item h2, .game-type-item h2, .game-level-item h2 {
+        font-size: 20px;
+    }
+    .game-btn, .game-back-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .game-info {
+        gap: 15px;
+        font-size: 14px;
+        flex-wrap: wrap;
+    }
+    /* 卡牌大小缩小 */
+    .poker {
+        width: 55px;
+        height: 75px;
+    }
+    .game-board {
+        gap: 6px;
+    }
+    /* 资源中心：音频卡片单列 */
+    .player-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .player-card {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    /* 音乐详情页 */
     .player-container {
         flex-direction: column;
         gap: 30px;
+        margin: 20px auto;
+    }
+    .vinyl-section {
+        width: 260px;
+        height: 260px;
+    }
+    .vinyl-detail {
+        width: 240px;
+        height: 240px;
     }
     .back-btn {
-        top: 80px;
-        left: 15px;
-        padding: 6px 12px;
+        top: 110px;
+        left: 10px;
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    .lyric-area {
+        height: 280px;
         font-size: 14px;
+    }
+    .bottom-control-bar {
+        padding: 10px 15px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .music-control-center {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+    }
+    .music-func-right {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 25px;
+    }
+    .progress-bar-wrap {
+        bottom: 110px;
+    }
+    /* 知识问答 */
+    .quiz-container {
+        padding: 10px;
+    }
+    .question {
+        font-size: 18px;
+    }
+    .option {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .level-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    /* 社区交流三栏变一栏 */
+    .community-wrap {
+        flex-direction: column;
+    }
+    .left-side, .right-side {
+        width: 100%;
+    }
+    .post-content, .post-tool, .comment-area {
+        padding-left: 0;
+    }
+    /* 个人中心卡片 */
+    .user-info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .detail-section {
+        padding: 15px;
+    }
+}
+
+/* 超小手机（≤480px）进一步微调卡牌和字体 */
+@media (max-width: 480px) {
+    .game-board {
+        gap: 4px;
+    }
+    .poker {
+        width: 45px;
+        height: 65px;
+    }
+    .carousel-item {
+        width: 200px;
+        height: 150px;
+    }
+    .content-title {
+        font-size: 20px;
+    }
+    .card-title {
+        font-size: 16px;
     }
 }
